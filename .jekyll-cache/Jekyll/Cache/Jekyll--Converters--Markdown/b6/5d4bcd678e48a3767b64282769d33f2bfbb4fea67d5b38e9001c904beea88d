@@ -1,0 +1,14 @@
+I"�<h2 id="1-dir">1. dir()</h2>
+
+<p>Python interpreter(shell)에 <code class="language-plaintext highlighter-rouge">dir()</code>를 입력하면 caller의 스코프에 있는 변수들의 list를 보여준다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Python 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 22:45:29) 
+[MSC v.1916 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+&gt;&gt;&gt; dir()
+['__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__']
+</code></pre></div></div>
+
+<p><img src="../../../../assets/images/dir1.JPG" alt="dir1" /></p>
+
+:ET

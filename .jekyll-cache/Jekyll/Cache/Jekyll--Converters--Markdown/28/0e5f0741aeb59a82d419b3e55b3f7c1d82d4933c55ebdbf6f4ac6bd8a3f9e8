@@ -1,0 +1,54 @@
+I"�<h2 id="순서">순서</h2>
+
+<ol>
+  <li>mongoose.Schema 정의하기</li>
+  <li>SchemaTypes 설정하기</li>
+  <li>Validating</li>
+  <li>virtual property 설정하기</li>
+  <li>pre hook 설정하기</li>
+  <li>plugin 설정하기</li>
+  <li>export</li>
+  <li>reference 사이트</li>
+</ol>
+
+<h3 id="1-mongooseschema-정의하기">1. <code class="language-plaintext highlighter-rouge">mongoose.Schema</code> 정의하기</h3>
+
+<p>Schema는 Mongodb의 collection에 mapping되며 Schema 정의는 documents의 shape를 설정하는 단계다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">mongoose</span><span class="dl">"</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">userSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
+    <span class="c1">// property 내용이 들어간다.</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<h3 id="2-schematypes-설정하기">2. <code class="language-plaintext highlighter-rouge">SchemaTypes</code> 설정하기</h3>
+
+<p>property의 data type을 설정하는 단계.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">userSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">email</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">password</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">zipCode</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
+    <span class="c1">// 다른 schema와 association 설정. one to many 관계</span>
+    <span class="na">product</span><span class="p">:</span> <span class="p">[{</span><span class="na">type</span><span class="p">:</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span> <span class="na">ref</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Product</span><span class="dl">"</span><span class="p">}]</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<h3 id="3-validating">3. Validating</h3>
+
+<p>document에 들어온 데이터를 검증하는 단계를 추가한다. 의도하지 않은 데이터가 저장되는 것을 방지한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">userSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">email</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">password</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">zipCode</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
+    <span class="c1">// 다른 schema와 association 설정. one to many 관계</span>
+    <span class="na">product</span><span class="p">:</span> <span class="p">[{</span><span class="na">type</span><span class="p">:</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span> <span class="na">ref</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Product</span><span class="dl">"</span><span class="p">}]</span>
+<span class="p">})</span>
+
+
+</code></pre></div></div>
+:ET

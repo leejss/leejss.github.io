@@ -1,0 +1,14 @@
+I"o<h2 id="순서">순서</h2>
+
+<ol>
+  <li>mongSchema 정의하기</li>
+  <li>Property 설정하기</li>
+  <li>virtual property 설정하기</li>
+  <li>pre hook 설정하기</li>
+  <li>plugin 설정하기</li>
+  <li>export</li>
+</ol>
+
+<h3 id="1-mongooseschema-정의하기">1. <code class="language-plaintext highlighter-rouge">mongoose.Schema</code> 정의하기</h3>
+
+:ET

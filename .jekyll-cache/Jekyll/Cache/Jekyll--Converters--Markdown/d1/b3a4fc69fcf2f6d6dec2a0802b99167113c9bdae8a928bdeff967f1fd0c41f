@@ -1,0 +1,122 @@
+I"�&<h2 id="순서">순서</h2>
+
+<ol>
+  <li>mongoose.Schema 정의하기</li>
+  <li>SchemaTypes 설정하기</li>
+  <li>Validating</li>
+  <li>virtual property 설정하기</li>
+  <li>pre hook 설정하기</li>
+  <li>plugin 설정하기</li>
+  <li>export</li>
+  <li>reference 사이트</li>
+</ol>
+
+<h3 id="1-mongooseschema-정의하기">1. <code class="language-plaintext highlighter-rouge">mongoose.Schema</code> 정의하기</h3>
+
+<p>Schema는 Mongodb의 collection에 mapping되며 Schema 정의는 documents의 shape를 설정하는 단계다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">mongoose</span><span class="dl">"</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">userSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
+    <span class="c1">// property 내용이 들어간다.</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<h3 id="2-schematypes-설정하기">2. <code class="language-plaintext highlighter-rouge">SchemaTypes</code> 설정하기</h3>
+
+<p>property의 data type을 설정하는 단계.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">userSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">email</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">password</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="na">zipCode</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
+    <span class="c1">// 다른 schema와 association 설정. one to many 관계</span>
+    <span class="na">product</span><span class="p">:</span> <span class="p">[{</span><span class="na">type</span><span class="p">:</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span> <span class="na">ref</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Product</span><span class="dl">"</span><span class="p">}]</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<h3 id="3-validating">3. Validating</h3>
+
+<p>document에 들어온 데이터를 검증하는 단계를 추가한다. 의도하지 않은 데이터가 저장되는 것을 방지한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">userSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">first</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">type</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+            <span class="na">trim</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="na">last</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">type</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> 
+            <span class="na">trim</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">email</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+        <span class="na">unique</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">lowercase</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">required</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+
+    <span class="na">password</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+        <span class="na">required</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="na">zipCode</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
+        <span class="na">min</span><span class="p">:</span> <span class="p">[</span><span class="mi">10000</span><span class="p">,</span> <span class="dl">"</span><span class="s2">유효하지 않은 우편번호입니다.</span><span class="dl">"</span><span class="p">],</span>
+        <span class="na">max</span><span class="p">:</span> <span class="mi">99999</span>
+    <span class="p">},</span>
+    <span class="c1">// 다른 schema와 association 설정. one to many 관계</span>
+    <span class="na">product</span><span class="p">:</span> <span class="p">[{</span><span class="na">type</span><span class="p">:</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span> <span class="na">ref</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Product</span><span class="dl">"</span><span class="p">}]</span>
+    <span class="p">},</span>
+    <span class="c1">// one to one 관계</span>
+    <span class="nx">subscribedAccount</span><span class="p">:</span> <span class="p">{</span> <span class="nl">type</span><span class="p">:</span> <span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span> <span class="nx">ref</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Subscriber</span><span class="dl">"</span> <span class="p">},</span>
+
+<span class="nx">timestamps</span><span class="p">:</span> <span class="kc">true</span><span class="p">,)</span>
+</code></pre></div></div>
+
+<p>mongoose가 정의한 validation이며 document가 mongodb에 저장되기 전에 내부적으로 <code class="language-plaintext highlighter-rouge">Document.prototype.validate()</code>를 호출하여 검증한다.</p>
+
+<h3 id="4-virtual-property-설정하기">4. <code class="language-plaintext highlighter-rouge">virtual</code> property 설정하기</h3>
+
+<p><code class="language-plaintext highlighter-rouge">virtual</code>은 mongodb에 저장되지 않으나 설정하고 활용할 수 있는 document properties다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">virtual</code>을 설정하기 위해서는 <code class="language-plaintext highlighter-rouge">Schema.prototype.virtual()</code>을 이용해야 한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">userSchema</span><span class="p">.</span><span class="nx">virtual</span><span class="p">(</span><span class="dl">"</span><span class="s2">fullName</span><span class="dl">"</span><span class="p">).</span><span class="kd">get</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">first</span><span class="p">}${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">last</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="c1">// userSchema.virtual("fullName") create VirtualType with name 'fullName'</span>
+<span class="c1">// fullName이라는 property를 활용할 수 있다.</span>
+</code></pre></div></div>
+
+<h3 id="5-pre-hook-설정하기">5. <code class="language-plaintext highlighter-rouge">pre</code> hook 설정하기</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Schema.prototype.pre()</code>을 이용해 hook을 설정한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 만약 동일한 email을 가진 subscriber document가 존재하다면 
+// user와 subscriber를 associate한다. 
+// pre()의 첫번째 인자로 method name이 string 타입으로 들어간다.
+userSchema.pre("save", function (next) {
+  let user = this;
+  if (user.subscribedAccount === undefined) {
+    Subscriber.findOne({
+      email: user.email,
+    })
+      .then((subscriber) =&gt; {
+        user.subscribedAccount = subscriber;
+        next();
+      })
+      .catch((error) =&gt; {
+        console.log(`Error in connecting subscriber: ${error.message}`);
+        next(error);
+      });
+  } else {
+    next();
+  }
+});
+</code></pre></div></div>
+
+:ET

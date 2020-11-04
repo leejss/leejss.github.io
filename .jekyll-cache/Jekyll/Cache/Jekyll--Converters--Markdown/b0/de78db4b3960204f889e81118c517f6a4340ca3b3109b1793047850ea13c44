@@ -1,0 +1,15 @@
+I"d<h2 id="1-dir">1. dir()</h2>
+
+<p>Python interpreter(shell)에 <code class="language-plaintext highlighter-rouge">dir()</code>를 입력하면 caller의 스코프에 있는 변수들의 list를 보여준다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"python"</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">dir</span><span class="p">()</span>
+<span class="p">[</span><span class="s">'__annotations__'</span><span class="p">,</span> <span class="s">'__builtins__'</span><span class="p">,</span> <span class="s">'__doc__'</span><span class="p">,</span> <span class="s">'__loader__'</span><span class="p">,</span>
+<span class="s">'__name__'</span><span class="p">,</span> <span class="s">'__package__'</span><span class="p">,</span> <span class="s">'__spec__'</span><span class="p">,</span> <span class="s">'name'</span><span class="p">,</span> <span class="s">'x'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div></div>
+
+<p>dir()의 매개변수로 built-in type이나 object를 넘겨주면 해당 타입의 attributes와 methods를 볼 수 있다.</p>
+
+:ET
