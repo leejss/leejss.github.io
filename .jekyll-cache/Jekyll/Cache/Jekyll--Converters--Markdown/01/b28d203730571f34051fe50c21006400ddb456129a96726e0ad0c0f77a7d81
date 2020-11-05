@@ -1,6 +1,0 @@
-I"-<h2 id="1-dir">1. dir()</h2>
-
-<p>Python interpreter(shell)에 <code class="language-plaintext highlighter-rouge">dir()</code>를 입력하면 caller의 스코프에 있는 변수들의 list를 보여준다.</p>
-
-<p><img src="D:\blog\jeremywagon.github.io\_posts\2020-11-04\dir1.jpg" alt="dir1" /></p>
-:ET
