@@ -1,0 +1,83 @@
+I"�<h2 id="순서">순서</h2>
+
+<ol>
+  <li>필요한 패키지와 모듈 불러오기</li>
+  <li>CRUD 중 <code class="language-plaintext highlighter-rouge">create</code> action 구현하기</li>
+  <li>Reference 사이트</li>
+</ol>
+
+<h3 id="1-필요한-패키지와-모듈-불러오기">1. 필요한 패키지와 모듈 불러오기</h3>
+
+<p>User 모델과 로그인/로그아웃 처리를 위해 <code class="language-plaintext highlighter-rouge">passport.js</code>를 불러온다</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// controllers/userController.js</span>
+<span class="kd">const</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">../models/user</span><span class="dl">"</span><span class="p">),</span>
+    <span class="nx">Passport</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">passport</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="2-crud-actions-구현하기">2. CRUD actions 구현하기</h3>
+
+<p>C: Create</p>
+
+<p>R: Read</p>
+
+<p>U: Update</p>
+
+<p>D: Delete</p>
+
+<p><code class="language-plaintext highlighter-rouge">User</code> 모델에게 행해져야 하는 기본적인 actions를 정의하는 단계</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// controllers/userController.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+
+    <span class="na">create</span><span class="p">:</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">ski</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">next</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="kd">let</span> <span class="nx">newUser</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">name</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">first</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">first</span><span class="p">,</span>
+                <span class="na">last</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">last</span>
+            <span class="p">},</span>
+            <span class="na">email</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+            <span class="na">password</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span>
+            <span class="na">zipCode</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">zipCode</span>
+        <span class="p">}</span>
+
+        <span class="c1">// userSchema의 plugin인 passport-local-mongoose를 이용하여 </span>
+        <span class="c1">// mongodb에 저장한다.</span>
+        <span class="nx">User</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">newUser</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// user가 성공정으로 저장되었을 경우 flash message를 띄운다.</span>
+                <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span> <span class="s2">`</span><span class="p">${</span><span class="nx">user</span><span class="p">.</span><span class="nx">fullName</span><span class="p">}</span><span class="err">이 저장되었습니다.</span><span class="s2">`</span><span class="p">)</span>
+                <span class="c1">// 저장되었을 경우, 로그인 페이지 이동</span>
+                <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">redirect</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/users/login</span><span class="dl">"</span>
+                <span class="nx">next</span><span class="p">()</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span> <span class="s2">`</span><span class="err">User를 생성하지 못했습니다: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+                <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">redirect</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/users/new</span><span class="dl">"</span>
+                <span class="nx">next</span><span class="p">()</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">User</code> 모델을 통해서 <code class="language-plaintext highlighter-rouge">register()</code>를 호출할 수 있는 이유는 <code class="language-plaintext highlighter-rouge">models/user.js</code>에서</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">userSchema</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="nx">passportLocalMongoose</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">usernameField</span><span class="p">:</span> <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>plugin으로 <code class="language-plaintext highlighter-rouge">passport-local-mongose</code>를 설정했기 때문이다.</p>
+
+<p><strong>register(user, password, cb) Convenience method to register a new user instance with a given password. Checks if username is unique.</strong></p>
+
+<h3 id="3-reference-사이트">3. Reference 사이트</h3>
+
+<p><a href="https://www.npmjs.com/package/passport-local-mongoose" target="_blank">passport-local-mongoose</a></p>
+:ET

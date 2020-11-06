@@ -13,9 +13,9 @@ tags:
 
 ## 순서
 
-- 1. 필요한 패키지와 모듈 불러오기
-- 2. CRUD 중 `create` action 구현하기
-- 3. Reference 사이트
+1. 필요한 패키지와 모듈 불러오기
+2. CRUD 중 `create` action 구현하기
+3. Reference 사이트
   
 ### 1. 필요한 패키지와 모듈 불러오기
 
@@ -30,8 +30,11 @@ const User = require("../models/user"),
 ### 2. CRUD actions 구현하기
 
 C: Create
+
 R: Read
+
 U: Update
+
 D: Delete
 
 `User` 모델에게 행해져야 하는 기본적인 actions를 정의하는 단계
