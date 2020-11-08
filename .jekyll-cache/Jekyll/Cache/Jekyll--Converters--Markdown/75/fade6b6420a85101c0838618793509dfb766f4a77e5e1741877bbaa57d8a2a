@@ -1,0 +1,9 @@
+I"><h2 id="1-breadth-first-search">1. Breadth-first search</h2>
+
+<p><strong>Breadth</strong>를 번역하면 ‘<strong>너비</strong>’ (또는 폭)다.</p>
+
+<p>그렇다면 여기서 왜 너비라는 단어를 사용하는 것일까?</p>
+
+<p>그래프 G = (V, E)와 <strong>source</strong> vertex s가 주어져</p>
+
+:ET

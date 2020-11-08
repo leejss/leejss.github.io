@@ -1,0 +1,46 @@
+I"<h2 id="0-basic">0. Basic</h2>
+
+<p>Vertices(점)가 V고 Edges(선)가 E인 그래프 G: G = (V,E)</p>
+
+<p><em>Edge</em>를 기준으로 나눈 그래프의 두 가지 종류:</p>
+
+<ul>
+  <li>Undirected graph: edge가 양뱡향(bidirectional) ( O — O )</li>
+  <li>Directed graph: edge가 단방향(unidirectional)  ( O –&gt; O )</li>
+</ul>
+
+<p><strong>Searching a graph</strong>의 의미: edges를 따라서 vertices를 찾아가는(visit) 것</p>
+
+<p>그래프를 표현하는 두 가지 방법 (two <strong>computational reprentations</strong> of graphs)</p>
+
+<ul>
+  <li>adjacency-list representation (인접리스트)</li>
+  <li>adjacency-matrix representation (인접행렬)</li>
+</ul>
+
+<h2 id="1-adjacency-list-representation-인접리스트">1. adjacency-list representation (인접리스트)</h2>
+
+<p>각각의 Vertex는 edge로 연결된 다른 Vertex를 요소로 삼은 Adj 리스트를 가진다.</p>
+
+<p>각각의 다른 V인 <code class="language-plaintext highlighter-rouge">u</code>, <code class="language-plaintext highlighter-rouge">v</code>가 존재할때, <code class="language-plaintext highlighter-rouge">edge(u,v)</code>가 존재한다면,</p>
+
+<p><code class="language-plaintext highlighter-rouge">Adj[u]</code>는 <code class="language-plaintext highlighter-rouge">v</code>를 요소로 가지고 있다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Adj[u]</code>의 <code class="language-plaintext highlighter-rouge">length</code> 의 합은 <code class="language-plaintext highlighter-rouge">|E|</code>와 같다. (when G = (V,E))</p>
+
+<p><strong>Undirected 그래프인 경우</strong>, edge가 점 양쪽을 이어주기 때문에 만약 <code class="language-plaintext highlighter-rouge">Adj[u]</code>의 요소 중 <code class="language-plaintext highlighter-rouge">v</code>가 존재한다면 <code class="language-plaintext highlighter-rouge">Adj[v]</code>의 요소에 <code class="language-plaintext highlighter-rouge">u</code>도 존재하게 된다.</p>
+
+<p><strong>반면에 Directed 그래프인 경우</strong>, edge는 단방향이기 때문에 <code class="language-plaintext highlighter-rouge">Adj[u]</code>의 요소 중 <code class="language-plaintext highlighter-rouge">v</code>가 존재한다면 <code class="language-plaintext highlighter-rouge">Adj[v]</code>의 요소에는 <code class="language-plaintext highlighter-rouge">u</code>가 존재할 수 없다.</p>
+
+<h2 id="2-adjacency-matrix-representation-인접행렬">2. adjacency-matrix representation (인접행렬)</h2>
+
+<p><code class="language-plaintext highlighter-rouge">|V|</code> x <code class="language-plaintext highlighter-rouge">|V|</code> 행렬을 구성한다</p>
+
+<p>예를 들어, 그래프의 점(Vertex)의 숫자가 총 5개라면 5 x 5 행렬을 구성</p>
+
+<p>만약 edge(u,v)가 존재한다면 1, 존재하지 않는다면 0으로 행렬을 채운다.</p>
+
+<h2 id="3-참고-사이트">3. 참고 사이트</h2>
+
+<p><a href="https://www.geeksforgeeks.org/graph-and-its-representations/">인접리스트와 인접행렬 그림</a></p>
+:ET

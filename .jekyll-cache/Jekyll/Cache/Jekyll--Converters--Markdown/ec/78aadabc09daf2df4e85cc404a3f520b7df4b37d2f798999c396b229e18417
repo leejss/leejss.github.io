@@ -1,0 +1,36 @@
+I"
+<h2 id="1-breadth-first-search">1. Breadth-first search</h2>
+
+<p><strong>Breadth</strong>를 번역하면 ‘<strong>너비</strong>’ (또는 폭)다.</p>
+
+<p>그렇다면 여기서 왜 너비라는 단어를 사용하는 것일까?</p>
+
+<p>그래프 G = (V, E)와 <strong>source</strong> vertex <em>s</em>가 주어져 있다고 가정해보자.</p>
+
+<p><em>s</em>를 기준으로 그래프를 너비 우선 탐색하고자 한다.</p>
+
+<p>기준 <em>s</em>를 기준으로 1만큼 떨어져 있는 vertices를 먼저 discover한다.</p>
+
+<p>1만큼 떨어져 있는 vertices를 전부 discover했으면 2만큼 떨어져 있는 vertices를 탐색하기 시작한다.</p>
+
+<p><strong>즉, distance k만큼 떨어져 있는 vertices를 전부 discover해야 distance k+1 탐색이 시작한다.</strong></p>
+
+<p>이러한 탐색의 결과로 Tree구조가 만들어진다.</p>
+
+<p>여기서 <strong>너비</strong>가 등장하게 된다.</p>
+
+<p><img src="../../../../assets/images/bead-first.jpg" alt="breadth-first-search" /></p>
+
+<p>위 그림에서 s를 기준으로 탐색을 수행한다.</p>
+
+<p>s를 기준으로 너비우선 탐색을 수행하면 다음과 같은 Tree구조가 만들어진다.</p>
+
+<p><img src="../../../../assets/images/tree.jpg" alt="breadth-first-search" /></p>
+
+<p>숫자는 기준 <em>s</em>가 0일때, <em>s</em>로 부터 떨어진 거리를 의미한다.</p>
+
+<p>여기서 <strong>너비를 우선으로 탐색</strong> 한다는 것은, 검색 결과를 Tree구조로 만들어 나갈때, 너비가 우선적으로 만들어 지기 때문에 너비 우선 탐색이라고 한다.(하는 거 같다.)</p>
+
+<p>다시 말하지만 이렇게 너비가 우선적으로 채워지는 이유는 같은 거리에 있는 vertices부터 찾아나가기 때문이다.</p>
+
+:ET

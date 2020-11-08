@@ -1,0 +1,92 @@
+I"Y<h2 id="scope">Scope</h2>
+
+<p>Scope란 변수가 사는 공간이다.</p>
+
+<p>변수는 scope를 벗어나면 소멸하게 된다.</p>
+
+<p>변수의 scope는 변수에 처음 대입(assignment)연산이 이루어진 곳으로 정해진다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># beginning of module
+</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+
+</code></pre></div></div>
+
+<h2 id="legb-rule">LEGB rule</h2>
+
+<p>이름을 찾는 과정을 나타낸 규칙을 말한다.</p>
+
+<p>LEGB는 각각 scope를 나타낸다.</p>
+
+<p>L: Local</p>
+
+<p>E: Enclosing functions(defs)</p>
+
+<p>G: Global</p>
+
+<p>B: Builtins</p>
+
+<p>이름을 찾을 때, 같은 scope부터 찾으며 동일한 이름이 없는 경우 상위 스코프로 탐색을 이어 나간다.</p>
+
+<p>Local: 함수 안에서 선언된 변수의 스코프</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+    <span class="c1"># 이름 x는 local scope에 살게 된다.
+</span>    <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+
+</code></pre></div></div>
+
+<p>Enclosing functions: local보다 상위 이면서, global보다는 하위인 scope다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># enclosing functions scope
+</span>    <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># local scope
+</span></code></pre></div></div>
+
+<p>Global: function 밖인 동시에 module안의 scope</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># global variable
+</span><span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># local vairable
+</span>
+<span class="c1"># 위에 보이는 두 x는 같은 객체가 아니다.
+# 스코프가 다르기 때문.
+</span></code></pre></div></div>
+
+<p>이름을 찾을 때, 같은 스코프 부터 LEGB 순으로 이름을 찾는다.</p>
+
+<h2 id="global-과-nonlocal"><code class="language-plaintext highlighter-rouge">global</code> 과 <code class="language-plaintext highlighter-rouge">nonlocal</code></h2>
+
+<p>변수이름 앞에 <code class="language-plaintext highlighter-rouge">global</code>과 <code class="language-plaintext highlighter-rouge">nonlocal</code>를 표시함으로써 찾아야할 scope를 지정할 수 있다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">x</span> <span class="c1"># x는 global scope에 있는 x를 가리킨다.
+</span>    <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">func</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># 20
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">nonlocal</code>은 enclosing def의 scope를 가리킨다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">maker</span><span class="p">():</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+        <span class="k">nonlocal</span> <span class="n">count</span>
+        <span class="c1"># count는 local variable이 아닌 enclosing func인 maker의 영역의 count를 가리킨다.
+</span>        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">func</span>
+
+<span class="n">foo</span> <span class="o">=</span> <span class="n">maker</span><span class="p">()</span>
+<span class="n">foo</span><span class="p">()</span> <span class="c1"># 1
+</span><span class="n">foo</span><span class="p">()</span> <span class="c1"># 2
+</span><span class="n">foo</span><span class="p">()</span> <span class="c1"># 3
+</span>
+</code></pre></div></div>
+:ET
