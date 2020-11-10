@@ -17,7 +17,7 @@ baseurl:
 
 author:
   name: "Jeremy Wagon"
-  url:
+  url: https://jeremywagon.github.io
 
 paginate: 5
 # paginate_path:    '/page:num'
