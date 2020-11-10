@@ -1,0 +1,58 @@
+I"%<h2 id="1-nested-scope">1. Nested Scope</h2>
+
+<p><code class="language-plaintext highlighter-rouge">def</code>안 다른 <code class="language-plaintext highlighter-rouge">def</code>를 정의했을 때 <strong>Nested Scope</strong>가 생긴다.</p>
+
+<p>innter <code class="language-plaintext highlighter-rouge">def</code>를 감싸는(enclosing) outer <code class="language-plaintext highlighter-rouge">def</code>의 scope를 <strong>enclosing function(def) scope</strong>라고 한다.</p>
+
+<p>(주의: def안에서 선언된 변수는 모두 <strong>Local</strong>이다.)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># Global
+</span>
+<span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># Local to outer def and Enclosing Scope. (Enclosing def local)
+</span>    <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="mi">200</span> <span class="c1"># Local to inner def
+</span>
+</code></pre></div></div>
+
+<h2 id="2-closure-function-maker-or-factory-function">2. Closure (function maker or factory function)</h2>
+
+<p>위에서 설명한 Nested Scope와 관련된 Functional Programming의 technique중 하나이다.</p>
+
+<h3 id="원리--함수-안에서-선언된-또-다른-함수는-enclosing-scope를-기억한다">원리 : 함수 안에서 선언된 또 다른 함수는 enclosing scope를 기억한다</h3>
+
+<p>즉, <code class="language-plaintext highlighter-rouge">inner</code>는 <code class="language-plaintext highlighter-rouge">outer</code>의 scope를 기억하고 있다.</p>
+
+<p>따라서 <code class="language-plaintext highlighter-rouge">outer</code>의 영역이 메모리에서 소멸되었어도, <code class="language-plaintext highlighter-rouge">inner</code>는 여전히 <code class="language-plaintext highlighter-rouge">outer</code>의 scope에 있는 변수에 접근할 수 있다.</p>
+
+<p>간단한 예</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">def</span> <span class="nf">exponentN</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="c1"># 매개 변수 N은 enclosing scope에 존재.
+</span>    <span class="k">def</span> <span class="nf">action</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">X</span> <span class="o">**</span> <span class="n">N</span> <span class="c1"># 내부 함수에서 N에 접근 중.
+</span>    <span class="k">return</span> <span class="n">action</span> <span class="c1"># 내부에서 선언한 함수를 반환
+</span>
+<span class="n">exponent2</span> <span class="o">=</span> <span class="n">exponentN</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">exponent2</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># returns 4
+</span><span class="n">exponent2</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># returns 9
+</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">exponentN</code> 함수가 반환하면서 <code class="language-plaintext highlighter-rouge">local</code> scope가 소멸되었지만, 반환된 <code class="language-plaintext highlighter-rouge">action</code>은 스코프를 기억하고 있다.</p>
+
+<p>위와 같은 기법을 통해서 똑같은 작동방식을 가지지만 수가 다른 여러가지 함수를 만들어 낼 수 있다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">exponent3</span> <span class="o">=</span> <span class="n">exponentN</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">exponent4</span> <span class="o">=</span> <span class="n">exponentN</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">exponent5</span> <span class="o">=</span> <span class="n">exponentN</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">exponent3</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># returns 8
+</span><span class="n">exponent4</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#
+</span><span class="n">exponent5</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+:ET
