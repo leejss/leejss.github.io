@@ -3,10 +3,10 @@ markdown: kramdown
 highlighter: rouge
 
 # Setup
-title: Jeremy Wagon
+title: Leejs
 tagline: ""
 description: ""
-url: https://jeremywagon.github.io
+url: https://leejss.github.io/
 baseurl:
   /
 
@@ -17,8 +17,8 @@ baseurl:
   # sidebar_blog_link below.
 
 author:
-  name: "Jeremy Wagon"
-  url: https://jeremywagon.github.io
+  name: "Leejs"
+  url: https://leejss.github.io/
 
 paginate: 5
 # paginate_path:    '/page:num'
