@@ -1,0 +1,62 @@
+I"�<h2 id="순서">순서</h2>
+
+<ol>
+  <li>Login 구현하기</li>
+  <li>Logout 구현하기</li>
+</ol>
+
+<h2 id="1-login-구현하기">1. Login 구현하기</h2>
+
+<p>로그인과 관련된 action은 두 가지가 있다.</p>
+
+<ul>
+  <li>로그인 화면 보여주기</li>
+  <li>authenticate()</li>
+</ul>
+
+<h3 id="로그인-화면-보여주기">로그인 화면 보여주기</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ....</span>
+
+    <span class="na">login</span><span class="p">:</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">"</span><span class="s2">users/login</span><span class="dl">"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="authenticate">authenticate</h3>
+
+<p>입력한 데이터가 저장된 데이터와 일치하는지 증명하는 액션.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ....</span>
+    <span class="na">authenticate</span><span class="p">:</span> <span class="nx">passport</span><span class="p">.</span><span class="nx">authenticate</span><span class="p">(</span><span class="dl">"</span><span class="s2">local</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">failureRedirect</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/users/login</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">successRedirect</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">failureFlash</span><span class="p">:</span><span class="dl">"</span><span class="s2">로그인에 실패했습니다.</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">successFlash</span><span class="p">:</span><span class="dl">"</span><span class="s2">로그인하였습니다</span><span class="dl">"</span><span class="p">,</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><a href="http://www.passportjs.org/docs/authenticate/" target="_blank">Passport.js의 authenticate</a>를 이용한다.</p>
+
+<h2 id="2-logout-구현하기">2. Logout 구현하기</h2>
+
+<p><a href="http://www.passportjs.org/docs/logout/" target="_blank">passport.js의 logout()</a>을 이용한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ....</span>
+
+    <span class="na">logout</span><span class="p">:</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">logout</span><span class="p">()</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">로그아웃완료</span><span class="dl">"</span><span class="p">)</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">redirect</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">;</span>
+        <span class="nx">next</span><span class="p">()</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+:ET
