@@ -1,7 +1,7 @@
 ---
 layout: post 
 title: 유저모델 만들기(Creating a User model)
-categories: NodeJS
+categories: Post
 tags: 
 - TIL
 - express.js
@@ -111,7 +111,7 @@ userSchema.virtual("fullName").get(function () {
 
 `Schema.prototype.pre()`을 이용해 hook을 설정한다.
 
-```
+```javascript
 // 만약 동일한 email을 가진 subscriber document가 존재하다면 
 // user와 subscriber를 associate한다. 
 // pre()의 첫번째 인자로 method name이 string 타입(또는 정규표현식)으로 들어간다.
@@ -134,6 +134,7 @@ userSchema.pre("save", function (next) {
   }
 });
 ```
+
 mongodb에 save전에 Subscriber 모델에 동일한 이메일을 가진 document가 있으면 해당 document와 서로 association한다.
 
 이 것이 가능한 이유는 User의 모델의 schema type으로 subscribedAccount를 정의했기 때문이다.

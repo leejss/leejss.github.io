@@ -1,7 +1,7 @@
 ---
 layout: post 
 title: iterable과 iterator
-categories: Python 
+categories: Post 
 tags: 
 - TIL
 - python

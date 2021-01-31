@@ -1,7 +1,7 @@
 ---
 layout: post 
 title: LEGB rule
-categories: Python 
+categories: Post 
 tags: 
 - TIL
 - python

@@ -1,7 +1,7 @@
 ---
 layout: post 
 title: 너비 우선 탐색(Breadth-first search)
-categories: Algorithms
+categories: Post
 tags: 
 - TIL
 - Algorithms

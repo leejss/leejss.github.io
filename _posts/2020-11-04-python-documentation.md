@@ -1,7 +1,7 @@
 ---
 layout: post 
 title: 궁금한 거 파이썬에게 직접 물어보기(Python Documentation Sources)
-categories: Python 
+categories: Post 
 tags: 
 - TIL
 - python
@@ -9,7 +9,7 @@ tags:
 
 ## 1. `dir` function
 
-Python interpreter(shell)에 `dir()` 를 입력하면 caller의 스코프에 있는 변수들의 list를 보여준다. 
+Python interpreter(shell)에 `dir()` 를 입력하면 caller의 스코프에 있는 변수들의 list를 보여준다.
 
 ```python
 >>> x = 1
@@ -43,7 +43,7 @@ Python interpreter(shell)에 `dir()` 를 입력하면 caller의 스코프에 있
 
 \# comment가 statement나 expression 단위의 documentation이라면, docstring은 function, class, module 단위의 documentation이다.
 
-코드가 시작하기 전에 주로 `'''` (multi line string) 사이에 작성한다. 
+코드가 시작하기 전에 주로 `'''` (multi line string) 사이에 작성한다.
 
 쓰여진 doctstring은 해당 function, class 또는 module의 `__doc__` 속성에 저장된다.
 
@@ -94,7 +94,7 @@ General notes on the underlying Mersenne Twister core generator:
   and is, therefore, threadsafe.
 ```
 
-함수의 docstring도 직접 볼 수 있다. 
+함수의 docstring도 직접 볼 수 있다.
 
 ```python
 >>> print(random.shuffle.__doc__)
@@ -113,7 +113,7 @@ docstring에 해당하는 정보를 좀 더 readable하게 보여준다.
 
 `help()`의 매개변수로 모듈, 클래스, 함수를 전달한다. 매개변수의 정보를 보여준다.
 
-```
+```python
 >>> help(math.factorial)
 Help on built-in function factorial in module math:
 
@@ -127,9 +127,9 @@ factorial(x, /)
 
 `help`가 Pydoc의 command-line 버전이라면, python module docs는 GUI 버전이다.
 
-시작 프로그램의 python 설치폴더에 들어가면 찾을 수 있고, command prompt에서 접근할 수 있다. 
+시작 프로그램의 python 설치폴더에 들어가면 찾을 수 있고, command prompt에서 접근할 수 있다.
 
-```
+```python
 PS C:\Users\pc> python -m pydoc -b
 ```
 

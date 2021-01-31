@@ -1,7 +1,7 @@
 ---
 layout: post 
 title: 그래프 나타내기 (Reresentations of graphs)
-categories: Algorithms
+categories: Post
 tags: 
 - TIL
 - Algorithms

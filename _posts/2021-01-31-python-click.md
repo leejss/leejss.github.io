@@ -1,7 +1,7 @@
 ---
 layout: post 
 title: Python으로 cli app 만들기
-categories: Python 
+categories: Post 
 tags: 
 - TIL
 - python
@@ -30,10 +30,9 @@ click패키지를 이용하면 쉽게 cli app을 만들 수 있다. [공식 clic
 
 setuptools를 이용하여 script환경을 설정한다. click 공식 홈페이지에 나와 있는 [설명](https://click.palletsprojects.com/en/7.x/setuptools/){:target="_blank"}을 잘 따라하면 된다.  
 
-setup을 설정하지 않으면 cli app을 실행할 때, script에 `if __name__ =="__main__":`  suite안에 `cli()`를 호출해줘야 하며 터미널에서 `python 이름.py` 이런 식으로 스크립트를 실행해야 한다. 
+setup을 설정하지 않으면 cli app을 실행할 때, script에 `if __name__ =="__main__":`  suite안에 `cli()`를 호출해줘야 하며 터미널에서 `python 이름.py` 이런 식으로 스크립트를 실행해야 한다.
 
 그 외에도 click 공식 홈페이지에 setuptool를 사용해야 하는 이유를 3가지 제시하고 있다.
-
 
 ### 3. command 생성
 

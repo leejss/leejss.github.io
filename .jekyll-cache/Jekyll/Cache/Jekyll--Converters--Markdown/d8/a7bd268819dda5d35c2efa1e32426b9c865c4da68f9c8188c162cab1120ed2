@@ -1,0 +1,98 @@
+I"1$<h2 id="1-argument-유형">1. Argument 유형</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1"># caller
+</span><span class="n">func</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+<span class="n">func</span><span class="p">(</span><span class="n">arg1</span><span class="o">=</span><span class="n">value1</span><span class="p">,</span> <span class="n">arg2</span><span class="o">=</span><span class="n">value2</span><span class="p">)</span>
+<span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">iterable</span><span class="p">)</span>
+<span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="nb">dict</span><span class="p">)</span>
+
+<span class="c1"># function header
+</span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="o">*</span><span class="n">name</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="o">**</span><span class="n">name</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="o">*</span><span class="n">other</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="2-positional-argument-vs-keyword-argument">2. Positional Argument vs Keyword Argument</h2>
+
+<p>함수에 인자(argument)를 전달할 때, 함수는 어떻게 인자를 식별할까?</p>
+
+<h3 id="matched-by-position---positional-argument">Matched by position - positional argument</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+
+<span class="n">func</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># Positional argument. it prints 3 2 5 4
+</span>
+</code></pre></div></div>
+
+<p>간단하게 함수를 정의했고, 호출했다.</p>
+
+<p>로컬 변수인 a b c d는 어떻게 정해질까?</p>
+
+<p>함수를 호출할때 argumnet의 순서에 따라 변수가 연결할 객체가 정해진다.</p>
+
+<p>괄호안에 3 2 5 4를 넣은 경우, a는 int형 객체인 3과 연결되고 b는 int형 객체인 2와 연결된다. (다음 변수도 마찬가지)</p>
+
+<p>이런 식으로 position에 따라 결정되기 때문에 이를 positional argument라 한다.</p>
+
+<p>그냥 <code class="language-plaintext highlighter-rouge">func(arg1, arg2, ...)</code> 의 가장 일반적인 형태의 arguemnt passing을 어렵게 말한 것이다.</p>
+
+<p>(헷갈리지 않기: 함수를 정의하는 쪽이 아니라, <strong>함수를 호출하는 쪽</strong> 입장에서 인자를 넘겨주는 경우를 말한다.)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">f'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s"> is </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s"> years old'</span><span class="p">)</span>
+
+<span class="n">check</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">"James"</span><span class="p">)</span> <span class="c1"># 당연하게도 10 is James years old 라고 print한다.
+</span>
+<span class="c1"># 인자를 전달하는 순서에 따라 로컬 변수가 정해지기 때문이다.
+</span>
+</code></pre></div></div>
+
+<h3 id="matched-by-keywords---keyword-argument">Matched by keywords - Keyword Argument</h3>
+
+<p>Position에 상관없이 변수의 이름을 통해서 인자를 연결하는 방식이다.</p>
+
+<p>매개변수의 이름을 직접 명시하여 객체를 전달한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">func(arg1=10, arg2=20, ...)</code>의 형태를 가진다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span> <span class="c1"># 위의 예제와 똑같은 함수다.
+</span>    <span class="k">print</span><span class="p">(</span><span class="s">f'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s"> is </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s"> years old'</span><span class="p">)</span>
+
+<span class="n">check</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">"James"</span><span class="p">)</span> <span class="c1"># keyword로 전달. print James is 20 years old
+</span>
+</code></pre></div></div>
+
+<p>Keyword로 전달할 경우, 순서에 상관없이 로컬변수와 인자가 연결된다.</p>
+
+<p>Keyword argument에서 keyword를 변수의 이름으로 자연스럽게 해석하면 된다.</p>
+
+<h2 id="3-default-argument">3. Default Argument</h2>
+
+<p><code class="language-plaintext highlighter-rouge">def (name=value)</code> 유형에 해당한다.</p>
+
+<p>헷갈리지 말자. <code class="language-plaintext highlighter-rouge">(name=value)</code> 의 모습이 keyword argument와 같지만 defualt argument는 함수를 정의하는 입장에서 바라본 형태다. (keyword argument는 함수에 인자를 전달할 때에 한 형태에 해당)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">def</span> <span class="nf">my_sum</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+        <span class="n">start</span> <span class="o">+=</span> <span class="n">n</span>
+
+<span class="n">my_sum</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># 10. matched by position
+</span><span class="n">my_sum</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># 20. matched by position
+</span>
+<span class="n">my_sum</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">iterable</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># 물론 keyword로도 전달 가능하다.
+</span>
+</code></pre></div></div>
+
+<p>함수의 매개변수로 <code class="language-plaintext highlighter-rouge">iterable</code>과 <code class="language-plaintext highlighter-rouge">start</code>를 선언했다. 하지만 <code class="language-plaintext highlighter-rouge">start=0</code>으로 디폴트 값을 주었다.</p>
+
+<p>디폴트 값은 인자를 생략하면 셋팅되는 값이다.</p>
+:ET

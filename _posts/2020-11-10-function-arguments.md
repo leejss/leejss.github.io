@@ -1,7 +1,7 @@
 ---
 layout: post 
 title: Argument - Keywords vs Default argument - 1
-categories: Python
+categories: Post
 tags: 
 - TIL
 - Python
@@ -109,4 +109,3 @@ my_sum(start=100, iterable=[1,2,3,4]) # 물론 keyword로도 전달 가능하다
 함수의 매개변수로 `iterable`과 `start`를 선언했다. 하지만 `start=0`으로 디폴트 값을 주었다.
 
 디폴트 값은 인자를 생략하면 셋팅되는 값이다.
-
