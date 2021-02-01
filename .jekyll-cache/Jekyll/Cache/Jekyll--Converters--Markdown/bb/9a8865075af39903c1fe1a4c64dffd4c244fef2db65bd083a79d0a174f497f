@@ -1,0 +1,202 @@
+I"�<h2 id="mongodb-data">Mongodb data</h2>
+
+<h3 id="document">document</h3>
+
+<p>mongodb의 기본적인 데이터 단위는 document다. RBMS의 row라고 보면 된다.</p>
+
+<p>{“key”: value}의 형식을 가지고 있다. 자바스크립트 객체와 유사하다.</p>
+
+<p>document의 key의 타입은 string이기 때문에 “ “로 감싸줘야 한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">{"apple": "1"}</code>과 <code class="language-plaintext highlighter-rouge">{"apple": 1}</code>은 서로 다른 document이며(Type-sensitive)</p>
+
+<p><code class="language-plaintext highlighter-rouge">{"Apple": 1}</code>과 <code class="language-plaintext highlighter-rouge">{"apple": 1}</code>은 서로 다르다.(Case-sensitive)</p>
+
+<h3 id="collection">collection</h3>
+
+<p>document을 모은 것이 collection이다. RDBMS의 table이라고 보면 된다.</p>
+
+<hr />
+
+<h2 id="mongodb-crud">Mongodb CRUD</h2>
+
+<p>몽고디비에서 사용하는 CRUD methods를 먼저 간략히 정리한다.</p>
+
+<h3 id="create">Create</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- db.collection.insert()
+- db.collection.batchInsert()
+</code></pre></div></div>
+
+<h3 id="readquery">Read(query)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- db.collection.find()
+</code></pre></div></div>
+
+<h3 id="update">Update</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- db.collection.update()
+</code></pre></div></div>
+
+<h3 id="delete">Delete</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- db.collection.remove()
+- db.collection.drop()
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="create-method">CREATE method</h2>
+
+<h3 id="dbcollectioninsertdocument">db.collection.insert(document)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.fruit.insert({"apple": 2, "price": 4000})
+</code></pre></div></div>
+
+<p>insert의 매개변수로 document를 넘겨준다. mongodb의 collection은 dynamic schemas를 가지고 있기 때문에, 즉 key의 집합이 고정되어 있는 것이 아니기 때문에 document의 삽입이 자유롭다. nodejs 프로그래밍을 할 경우 mongoose를 통해 이를 보완할 수 있다.</p>
+
+<h3 id="dbcollectionbatchinsertarray">db.collection.batchInsert(array)</h3>
+
+<p>여러 개의 document를 삽입할 경우 batchInsert(배열)를 사용한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.fruit.batchInsert([{"banana":5}, {"mango":2}, {"orange":3}])
+</code></pre></div></div>
+
+<p>document의 배열을 매개변수로 넘겨주면 된다.</p>
+
+<h3 id="_id">_id</h3>
+
+<p>mongodb는 document를 삽입할 때 자동으로 <code class="language-plaintext highlighter-rouge">_id</code> key(or field)를 추가해서 삽입한다.</p>
+
+<hr />
+
+<h2 id="read-method">Read method</h2>
+
+<h3 id="dbcollectionfindquery">db.collection.find(query)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.fruit.find() // return all fruit's document
+db.fruit.find({"apple": 2}) // return {"apple": 2, "price": 4000}
+</code></pre></div></div>
+
+<p>db.collection.find()를 통해 document를 읽을 수 있다. find의 매개변수에 아무 것도 넘기지 않으면 collection의 모든 document를 리턴한다.</p>
+
+<p>매개변수로는 query의 기준이 되는 query document를 받는다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.collection.find({query1, query2, ..}) // query1 AND query2 AND ...
+</code></pre></div></div>
+
+<p>하나의 query document에 여러 개의 query를 받을 수 있는데, 이때 query는 AND로 묶여 검색을 수행한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.collection.find({}, {"key1": 1, "key2": 1}) 
+// return {_"id": ObjectId(""), "key1": value1, "key2": value2}
+</code></pre></div></div>
+
+<p>특정 키 값만 보고 싶은 경우 find()의 두번째 매개변수로 어떤 키를 보고 싶은지 정할 수 있다.
+여기서 1은 true를 의미한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.collection.find({}, {"key3": 0})
+</code></pre></div></div>
+
+<p>특정 키를 제외한 document를 보고 싶은 경우 0을 부여하면 된다. <strong>1은 포함, 0은 제외</strong></p>
+
+<h2 id="update-method">Update method</h2>
+
+<h2 id="delete-method">Delete method</h2>
+
+<p>Inserting or saving</p>
+
+<p>insert({})</p>
+
+<p>batchInsert([{}])</p>
+
+<p>Removing</p>
+
+<p>remove all documents
+    remove()</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>query document 
+remove(query document)
+
+drop()
+</code></pre></div></div>
+
+<p>Updating</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update(query document 업데이트 대상이 될 document, modifier document )
+
+conflicting updates
+
+replacing
+
+unique qeury document 이용
+
+Using modifier: to update specific fields. update modifier
+complex update operations 
+
+$inc: increment  
+$set: setting the value 
+    update(쿼리, {$set: {field: value}})
+$unset: removing specific field 
+    update(쿼리, {$unset: {key: 1}})
+
+Array modifier
+
+$push: adding element to the end of an array. 배열이 존재하지 않으면 새로운 배열을 생성
+    update(쿼리, {$push: {배열: {푸쉬 대상} }})
+
+$each: iterate 배열 
+$push with $each
+    update(쿼리, {$psuh: {field: {$each: [값1, 값2, 값3]}}})
+
+$slice: 
+$addToSet: prevent duplicates
+
+$pop
+    {"$pop": {"key": 1}} remove end of array
+    {"$pop": {"key": -1}} remove beginning
+
+$pull: pop by criteria
+    {"$pull": {"key": value}}
+</code></pre></div></div>
+
+<p>upsert: update + insert
+    쿼리에 맞는 document가 없다면 새로운 document를 생성</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update(쿼리, replace, upsert_flag)
+세번째 매개변수로 정할 수 있다.
+
+$setOnInsert
+
+
+save()
+</code></pre></div></div>
+
+<p>Querying
+    find() : all document
+    find(쿼리1, 쿼리2)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>특정 필드만 보고 싶은 경우
+second parameter of find()
+find({}, {"key1": 1, "key2": 1})
+
+특정 필드를 제외한 경우만 보고 싶은 경우
+
+
+conditional 
+    $lt
+    $lte
+    $gt
+    $gte
+
+    $ne
+
+    $in
+    $or
+
+query array
+
+    $all
+    $size
+</code></pre></div></div>
+
+:ET

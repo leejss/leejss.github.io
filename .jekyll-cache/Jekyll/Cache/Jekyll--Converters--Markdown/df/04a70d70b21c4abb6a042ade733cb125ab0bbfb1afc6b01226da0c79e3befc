@@ -1,0 +1,165 @@
+I"+<h2 id="mongodb-data">Mongodb data</h2>
+
+<h3 id="document">document</h3>
+
+<p>mongodb의 기본적인 데이터 단위는 document다. RBMS의 row라고 보면 된다.</p>
+
+<p>{“key”: value}의 형식을 가지고 있다. 자바스크립트 객체와 유사하다.</p>
+
+<p>document의 key의 타입은 string이기 때문에 “ “로 감싸줘야 한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">{"apple": "1"}</code>과 <code class="language-plaintext highlighter-rouge">{"apple": 1}</code>은 서로 다른 document이며(Type-sensitive)</p>
+
+<p><code class="language-plaintext highlighter-rouge">{"Apple": 1}</code>과 <code class="language-plaintext highlighter-rouge">{"apple": 1}</code>은 서로 다르다.(Case-sensitive)</p>
+
+<h3 id="collection">collection</h3>
+
+<p>document을 모은 것이 collection이다. RDBMS의 table이라고 보면 된다.</p>
+
+<hr />
+
+<h2 id="mongodb-crud">Mongodb CRUD</h2>
+
+<p>몽고디비에서 사용하는 CRUD methods를 먼저 간략히 정리한다.</p>
+
+<h3 id="create">Create</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- db.collection.insert()
+- db.collection.batchInsert()
+</code></pre></div></div>
+
+<h3 id="readquery">Read(query)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- db.collection.find()
+</code></pre></div></div>
+
+<h3 id="update">Update</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- db.collection.update()
+</code></pre></div></div>
+
+<h3 id="delete">Delete</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- db.collection.remove()
+- db.collection.drop()
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="create-method">CREATE method</h2>
+
+<h3 id="dbcollectioninsertdocument">db.collection.insert(document)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.fruit.insert({"apple": 1})
+</code></pre></div></div>
+
+<p>insert의 매개변수로 document를 넘겨준다. mongodb의 collection은 dynamic schemas를 가지고 있기 때문에, 즉 key의 집합이 고정되어 있는 것이 아니기 때문에 document의 삽입이 자유롭다. nodejs 프로그래밍을 할 경우 mongoose를 통해 이를 보완할 수 있다.</p>
+
+<p>여러 개의 document를 삽입할 경우 batchInsert([])를 사용한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.fruit.batchInsert(["banana":5])
+</code></pre></div></div>
+
+<h2 id="read-method">Read method</h2>
+
+<h2 id="update-method">Update method</h2>
+
+<h2 id="delete-method">Delete method</h2>
+
+<p>Inserting or saving</p>
+
+<p>insert({})</p>
+
+<p>batchInsert([{}])</p>
+
+<p>Removing</p>
+
+<p>remove all documents
+    remove()</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>query document 
+remove(query document)
+
+drop()
+</code></pre></div></div>
+
+<p>Updating</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update(query document 업데이트 대상이 될 document, modifier document )
+
+conflicting updates
+
+replacing
+
+unique qeury document 이용
+
+Using modifier: to update specific fields. update modifier
+complex update operations 
+
+$inc: increment  
+$set: setting the value 
+    update(쿼리, {$set: {field: value}})
+$unset: removing specific field 
+    update(쿼리, {$unset: {key: 1}})
+
+Array modifier
+
+$push: adding element to the end of an array. 배열이 존재하지 않으면 새로운 배열을 생성
+    update(쿼리, {$push: {배열: {푸쉬 대상} }})
+
+$each: iterate 배열 
+$push with $each
+    update(쿼리, {$psuh: {field: {$each: [값1, 값2, 값3]}}})
+
+$slice: 
+$addToSet: prevent duplicates
+
+$pop
+    {"$pop": {"key": 1}} remove end of array
+    {"$pop": {"key": -1}} remove beginning
+
+$pull: pop by criteria
+    {"$pull": {"key": value}}
+</code></pre></div></div>
+
+<p>upsert: update + insert
+    쿼리에 맞는 document가 없다면 새로운 document를 생성</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update(쿼리, replace, upsert_flag)
+세번째 매개변수로 정할 수 있다.
+
+$setOnInsert
+
+
+save()
+</code></pre></div></div>
+
+<p>Querying
+    find() : all document
+    find(쿼리1, 쿼리2)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>특정 필드만 보고 싶은 경우
+second parameter of find()
+find({}, {"key1": 1, "key2": 1})
+
+특정 필드를 제외한 경우만 보고 싶은 경우
+
+
+conditional 
+    $lt
+    $lte
+    $gt
+    $gte
+
+    $ne
+
+    $in
+    $or
+
+query array
+
+    $all
+    $size
+</code></pre></div></div>
+
+:ET
