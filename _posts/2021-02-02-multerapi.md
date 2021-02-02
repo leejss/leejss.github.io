@@ -1,0 +1,92 @@
+# multer 맛보기
+
+Nodejs 교과서로 공부중인데 multer라는 패키지를 알게 되었다.
+
+파일을 업로드 할때 사용하는 패키지인데 매커니즘을 더욱 완벽히 이해하고 싶어서
+
+몇 가지 내용을 좀 더 알아보았다.
+
+## Form
+
+브라우저에서 서버로 데이터를 보내기 위해 `<form>` 태그가 쓰인다.
+
+`<form>`태그 안에 `<input>`태그를 넣어서 파일을 업로드 할 수 있는 화면을 먼저 구성한다.
+
+```html
+<form action="POST" enctype="multipart/form-data">
+    <input type="file" accept="image/*">
+</form>
+```
+
+[MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attributes_for_form_submission)에 나와 있는 설명에 따르면 `<input>` 타입이 file인 경우 `enctype="multipart/form-data"`을 설정하라고 나와있다.
+
+`enctype`은 인코딩 타입을 말하며 **POST** 요청 시 media type(MIME type)을 결정한다.
+
+`form`의 기본 `enctype`은 `application/x-www-form-urlencoded`다.
+
+요청 헤더의 `Content-Type`에서 media type이 명시된다.
+
+***
+
+## Media type
+
+media type은 type과 subtype 두 부분으로 이루어져 있다.
+
+    type/subtype
+
+media type의 유형은 [여기서](https://en.wikipedia.org/wiki/Media_type)확인할 수 있다.
+
+***
+
+## multer
+
+**Multer is a node.js middleware for handling `multipart/form-data`, which is primarily used for uploading files.**
+
+multer 깃허브에 나와 있는 소개 글이다. multipart 형식의 요청을 도와주는 패키지인 것이다.
+
+```html
+<form action="/profile" method="post" enctype="multipart/form-data">
+  <input type="file" name="avatar" />
+</form>
+```
+
+form 양식이 이런 경우, multer는 `request` 객체에 `body`와 `file`(또는 `files`)객체를 추가한다.
+
+`body` 객체에는 form에 들어있는 텍스트 필드 값이, `file`객체에는 `form`에서 선택한 파일이 들어있다.
+
+***
+
+## multer 객체
+
+```javascript
+const multer = require("multer")
+const upload = multer() // upload를 통해 multer이용
+```
+
+multer객체는 여러가지 옵션을 지원한다
+
+```javascript
+const upload = multer({
+    dest: 'uploads/', // 업로드 파일을 저장할 위치
+    limits: { fileSize: 5 * 1024 * 1024 } // file size limits
+```
+
+`dest` 옵션을 통해서 파일을 저장할 디렉토리를 지정할 수 있다.
+
+`dest`의 값은 내부적으로 `diskStorage`의 `destination` 값으로 세팅된다.
+
+***
+
+## diskStorage
+
+diskStorage는 `destination`, `fieldname` 두 가지 옵션을 지원한다
+
+`destination`은 파일을 저장할 위치, `fieldname`은 저장할 이름을 설정한다.
+
+multer객체 생성에 옵션을 주는 것보다 디테일하게 설정할 수 있다.
+
+두 옵션 모두 함수이며 `req`, `file`, `cb` 세 가지 파라미터를 가진다.
+
+## 도움이 되는 자료
+
+[multipart](https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4)
