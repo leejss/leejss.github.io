@@ -1,0 +1,76 @@
+I"�<h2 id="react의-state">React의 State</h2>
+
+<p>State는 리엑트 컴포넌트안에서 정의되고 변경 가능한 데이터다.</p>
+
+<p>기본적으로 클래스형 컴포넌트에서 사용하며 함수형 컴포넌트에서는 <code class="language-plaintext highlighter-rouge">useState</code> 훅을 이용해 사용할 수 있다.</p>
+
+<p>State값이 변경하여 업데이트가 발생하면 리렌더링이 이루어진다.</p>
+
+<h2 id="state-정의">State 정의</h2>
+
+<p>클래스형 컴포넌트에서 State는 <code class="language-plaintext highlighter-rouge">constructor</code> 안에서 정의하거나 클래스 내부 프로퍼티로 정의할 수 있다.</p>
+
+<h3 id="constructor-이용">constructor 이용</h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">MyComponent</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> 
+        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">stateKey1</span><span class="p">:</span> <span class="nx">stateValue1</span><span class="p">,</span>
+            <span class="na">stateKey2</span><span class="p">:</span> <span class="nx">stateValue2</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">//...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="class-property-이용">Class property 이용</h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">MyComponent</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+    <span class="c1">// this가 필요없다.</span>
+    <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">stateKey1</span><span class="p">:</span> <span class="nx">stateValue1</span><span class="p">,</span>
+        <span class="na">stateKey2</span><span class="p">:</span> <span class="nx">stateValue2</span><span class="p">,</span>        
+    <span class="p">}</span>
+    <span class="c1">//...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="state-변경">state 변경</h2>
+
+<p>state가 변경한다는 것은 in-place 변경이 아니라 기본적으로 새로운 state객체가 할당되고 새로운 state객체를 이용하여 리렌더링을 한다는 것을 의미한다.</p>
+
+<p>state내용을 변경하기 위해서는 state객체에 직접 접근해 새로운 값을 재할당을 하는 것이 아니라 <code class="language-plaintext highlighter-rouge">setState()</code>함수를 이용하여 state내용을 변경한다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">//...</span>
+
+<span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ready</span><span class="dl">"</span>
+<span class="p">}</span>
+
+<span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span><span class="nx">message</span><span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">message</span><span class="si">}</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+                    <span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Sent</span><span class="dl">"</span>
+                <span class="p">})</span>
+            <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>       
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    )
+}
+
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">setState()</code> 함수는 <strong>이벤트 헨들러 내에서 비동기적이다.</strong> state를 비동기적으로 업데이트한다.</p>
+
+<p>비동기적으로 업데이트한다는 것은 setState함수 코드가 실행되고 그 즉시 state를 업데이트 하지 않는다는 뜻이다.</p>
+
+:ET

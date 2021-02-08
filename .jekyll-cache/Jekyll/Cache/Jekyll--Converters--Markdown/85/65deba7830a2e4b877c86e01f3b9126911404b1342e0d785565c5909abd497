@@ -1,0 +1,90 @@
+I"�<h2 id="dive-in-multer">dive in multer</h2>
+
+<p>Nodejs 교과서로 공부중인데 multer라는 패키지를 알게 되었다.</p>
+
+<p>파일을 업로드 할때 사용하는 패키지인데 매커니즘을 더욱 완벽히 이해하고 싶어서</p>
+
+<p>몇 가지 내용을 좀 더 알아보았다.</p>
+
+<h2 id="form">Form</h2>
+
+<p>브라우저에서 서버로 데이터를 보내기 위해 <code class="language-plaintext highlighter-rouge">&lt;form&gt;</code> 태그가 쓰인다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;form&gt;</code>태그 안에 <code class="language-plaintext highlighter-rouge">&lt;input&gt;</code>태그를 넣어서 파일을 업로드 할 수 있는 화면을 먼저 구성한다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"POST"</span> <span class="na">enctype=</span><span class="s">"multipart/form-data"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">accept=</span><span class="s">"image/*"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre></div></div>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attributes_for_form_submission">MDN</a>에 나와 있는 설명에 따르면 <code class="language-plaintext highlighter-rouge">&lt;input&gt;</code> 타입이 file인 경우 <code class="language-plaintext highlighter-rouge">enctype="multipart/form-data"</code>을 설정하라고 나와있다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">enctype</code>은 인코딩 타입을 말하며 <strong>POST</strong> 요청 시 media type(MIME type)을 결정한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">form</code>의 기본 <code class="language-plaintext highlighter-rouge">enctype</code>은 <code class="language-plaintext highlighter-rouge">application/x-www-form-urlencoded</code>다.</p>
+
+<p>요청 헤더의 <code class="language-plaintext highlighter-rouge">Content-Type</code>에서 media type이 명시된다.</p>
+
+<hr />
+
+<h2 id="media-type">Media type</h2>
+
+<p>media type은 type과 subtype 두 부분으로 이루어져 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type/subtype
+</code></pre></div></div>
+
+<p>media type의 유형은 <a href="https://en.wikipedia.org/wiki/Media_type">여기서</a>확인할 수 있다.</p>
+
+<hr />
+
+<h2 id="multer">multer</h2>
+
+<p><strong>Multer is a node.js middleware for handling <code class="language-plaintext highlighter-rouge">multipart/form-data</code>, which is primarily used for uploading files.</strong></p>
+
+<p>multer 깃허브에 나와 있는 소개 글이다. multipart 형식의 요청을 도와주는 패키지인 것이다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/profile"</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">enctype=</span><span class="s">"multipart/form-data"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"avatar"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre></div></div>
+
+<p>form 양식이 이런 경우, multer는 <code class="language-plaintext highlighter-rouge">request</code> 객체에 <code class="language-plaintext highlighter-rouge">body</code>와 <code class="language-plaintext highlighter-rouge">file</code>(또는 <code class="language-plaintext highlighter-rouge">files</code>)객체를 추가한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">body</code> 객체에는 form에 들어있는 텍스트 필드 값이, <code class="language-plaintext highlighter-rouge">file</code>객체에는 <code class="language-plaintext highlighter-rouge">form</code>에서 선택한 파일이 들어있다.</p>
+
+<hr />
+
+<h2 id="multer-객체">multer 객체</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">multer</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">upload</span> <span class="o">=</span> <span class="nx">multer</span><span class="p">()</span> <span class="c1">// upload를 통해 multer이용</span>
+</code></pre></div></div>
+
+<p>multer객체는 여러가지 옵션을 지원한다</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">upload</span> <span class="o">=</span> <span class="nx">multer</span><span class="p">({</span>
+    <span class="na">dest</span><span class="p">:</span> <span class="dl">'</span><span class="s1">uploads/</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// 업로드 파일을 저장할 위치</span>
+    <span class="na">limits</span><span class="p">:</span> <span class="p">{</span> <span class="na">fileSize</span><span class="p">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="p">}</span> <span class="c1">// file size limits</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">dest</code> 옵션을 통해서 파일을 저장할 디렉토리를 지정할 수 있다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">dest</code>의 값은 내부적으로 <code class="language-plaintext highlighter-rouge">diskStorage</code>의 <code class="language-plaintext highlighter-rouge">destination</code> 값으로 세팅된다.</p>
+
+<hr />
+
+<h2 id="diskstorage">diskStorage</h2>
+
+<p>diskStorage는 <code class="language-plaintext highlighter-rouge">destination</code>, <code class="language-plaintext highlighter-rouge">fieldname</code> 두 가지 옵션을 지원한다</p>
+
+<p><code class="language-plaintext highlighter-rouge">destination</code>은 파일을 저장할 위치, <code class="language-plaintext highlighter-rouge">fieldname</code>은 저장할 이름을 설정한다.</p>
+
+<p>multer객체 생성에 옵션을 주는 것보다 디테일하게 설정할 수 있다.</p>
+
+<p>두 옵션 모두 함수이며 <code class="language-plaintext highlighter-rouge">req</code>, <code class="language-plaintext highlighter-rouge">file</code>, <code class="language-plaintext highlighter-rouge">cb</code> 세 가지 파라미터를 가진다.</p>
+
+<h2 id="도움이-되는-자료">도움이 되는 자료</h2>
+
+<p><a href="https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4">multipart</a></p>
+:ET
