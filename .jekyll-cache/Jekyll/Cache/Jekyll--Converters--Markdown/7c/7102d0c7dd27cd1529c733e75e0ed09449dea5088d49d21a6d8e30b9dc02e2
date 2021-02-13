@@ -1,0 +1,201 @@
+I"�I<h2 id="static-routing-vs-dynamic-routing">Static Routing vs Dynamic Routing</h2>
+
+<h3 id="static-routing">Static Routing</h3>
+
+<p>URL을 통해서 요청하면 서버 어딘가에 저장되어 있는 static file(html, ejs ,…)로 응답하여 UI를 렌더링하는 방식</p>
+
+<p>예시) express.js의 routing</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span><span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">home</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// rendering home.html</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/profile</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span><span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">profile</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// rendering profile.html</span>
+<span class="p">})</span>
+
+</code></pre></div></div>
+
+<h3 id="dynamic-routing-in-react">Dynamic Routing in React</h3>
+
+<p>URL을 통해서 요청을 하면 특정 파일로 응답하는 것이 아니라 특정 컴포넌트를 렌더링하는 방식</p>
+
+<p>예시) <code class="language-plaintext highlighter-rouge">react-router-dom</code>의 <code class="language-plaintext highlighter-rouge">Router</code> 컴포넌트</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">Home</span><span class="p">}</span> <span class="nx">exact</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">"</span><span class="s2">/profile</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">Profile</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">/profile</code>을 요청하면 <code class="language-plaintext highlighter-rouge">Profile</code>컴포넌트를 화면에 렌더링한다.</p>
+
+<h2 id="설치">설치</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add react-router-dom
+</code></pre></div></div>
+
+<h2 id="router-component">Router component</h2>
+
+<p>Dynamic routing을 위해서 Router컴포넌트가 먼저 필요하다.</p>
+
+<p>react-router-dom은 두 가지 Rotuer 컴포넌트를 제공한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;BrowserRotuer&gt;
+&lt;HashRouter&gt;
+</code></pre></div></div>
+
+<p>일반적인 URL 경로를 다룰 때는 <code class="language-plaintext highlighter-rouge">&lt;BrowserRouter&gt;</code>를 이용한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">App</code>컴포넌트에서 <code class="language-plaintext highlighter-rouge">Route</code>를 이용하기 위해서 <code class="language-plaintext highlighter-rouge">&lt;App /&gt;</code>를 <code class="language-plaintext highlighter-rouge">&lt;BrowserRouter&gt;</code>로 감싼다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// index.js</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">BrowserRouter</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span>
+
+<span class="c1">//...</span>
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span>
+  <span class="o">&lt;</span><span class="nx">BrowserRouter</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">App</span> <span class="o">/&gt;</span>
+  <span class="o">&lt;</span><span class="sr">/BrowserRouter&gt;</span><span class="err">,
+</span>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="route-component-switch-component">Route component, Switch component</h2>
+
+<p>router를 등록하고 나면 routing을 위해서 <code class="language-plaintext highlighter-rouge">react-router-dom</code>은 <strong>route matcher</strong>라고 불리는 컴포넌트를 제공한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Route /&gt;
+&lt;Switch /&gt;
+</code></pre></div></div>
+
+<h3 id="route-component">Route component</h3>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;Route /&gt;</code>는 특정 URL을 요청했을 때 화면에 렌더링할 컴포넌트를 정의한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// App.js</span>
+
+<span class="c1">// ... 생략</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span> <span class="nx">component</span> <span class="o">=</span> <span class="p">{</span><span class="nx">Home</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">'</span><span class="s1">/profile</span><span class="dl">'</span> <span class="nx">component</span> <span class="o">=</span><span class="p">{</span><span class="nx">Profile</span><span class="p">}</span><span class="sr">/&gt;   </span><span class="err"> 
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">path</code>에 경로를 정의하고 <code class="language-plaintext highlighter-rouge">component</code>에는 해당 경로에 접근했을 때 렌더링할 컴포넌트를 정의한다.</p>
+
+<p>다음과 같은 표현도 있다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">'</span><span class="s1">/profile</span><span class="dl">'</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">Profile</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="sr">/Route</span><span class="err">&gt;
+</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Route</code>컴포넌트의 특징은, 경로가 일치하는 <code class="language-plaintext highlighter-rouge">Route</code> 컴포넌트를 찾았다 하더라도 거기서 멈추는 것이 아니라 경로가 일치하는 다른 <code class="language-plaintext highlighter-rouge">Route</code> 컴포넌트를 찾는다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// App.js</span>
+
+<span class="c1">// ... 생략</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span> <span class="nx">component</span> <span class="o">=</span> <span class="p">{</span><span class="nx">Home</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">'</span><span class="s1">/profile</span><span class="dl">'</span> <span class="nx">component</span> <span class="o">=</span><span class="p">{</span><span class="nx">Profile</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이게 무슨 뜻이냐면 <code class="language-plaintext highlighter-rouge">/profile</code> 을 요청했을 경우, <code class="language-plaintext highlighter-rouge">Home</code> 컴포넌트와 <code class="language-plaintext highlighter-rouge">Profile</code> 컴포넌트 둘 다 렌더링한다는 의미다. 모든 URL 경로는 <code class="language-plaintext highlighter-rouge">/</code>로 시작하기 때문이다</p>
+
+<p>따라서 올바르게 routing하기 위해서 specific한 <code class="language-plaintext highlighter-rouge">Route</code> 컴포넌트를 위에 위치하고 general한 컴포넌트를 아래에 위치시킨다.</p>
+
+<p>위 예제를 다음과 같이 수정해야 한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// App.js</span>
+
+<span class="c1">// ... 생략</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">'</span><span class="s1">/profile</span><span class="dl">'</span> <span class="nx">component</span> <span class="o">=</span><span class="p">{</span><span class="nx">Profile</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span> <span class="nx">component</span> <span class="o">=</span> <span class="p">{</span><span class="nx">Home</span><span class="p">}</span> <span class="sr">/&gt; </span><span class="err"> 
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>순서와 상관없이 routing을 하기 위해서 <code class="language-plaintext highlighter-rouge">Route</code> 컴포넌트는 <code class="language-plaintext highlighter-rouge">exact</code>라는 props을 제공한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// App.js</span>
+
+<span class="c1">// ... 생략</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span> <span class="nx">component</span> <span class="o">=</span> <span class="p">{</span><span class="nx">Home</span><span class="p">}</span> <span class="nx">exact</span> <span class="o">/&gt;</span>  
+            <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">'</span><span class="s1">/profile</span><span class="dl">'</span> <span class="nx">component</span> <span class="o">=</span><span class="p">{</span><span class="nx">Profile</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>해당 prop을 주면 <code class="language-plaintext highlighter-rouge">path</code>와 정확히 일치해야 렌더링이 일어난다.</p>
+
+<h3 id="switch-component">Switch component</h3>
+
+<p>여러 개의 <code class="language-plaintext highlighter-rouge">Route</code> 컴포넌트 중 일치하는 <code class="language-plaintext highlighter-rouge">path</code>하나만 렌더링 하고 싶은 경우 <code class="language-plaintext highlighter-rouge">Switch</code>컴포넌트를 사용하면 된다.</p>
+
+<p>사용법은 <code class="language-plaintext highlighter-rouge">Route</code> 컴포넌트를 <code class="language-plaintext highlighter-rouge">Switch</code> 컴포넌트로 감싸면 된다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">Switch</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">Route</span> <span class="p">...</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="nx">Route</span> <span class="p">...</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="nx">Route</span> <span class="p">...</span> <span class="o">/&gt;</span>
+
+<span class="o">&lt;</span><span class="sr">/Switch</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<p>예시</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">"</span><span class="s2">/about</span><span class="dl">"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">About</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="sr">/Route</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">"</span><span class="s2">/:user</span><span class="dl">"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">User</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="sr">/Route</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">Route</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">NoMatch</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="sr">/Route</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<p>위와 같은 내용에서 <code class="language-plaintext highlighter-rouge">/about</code> 을 요청했을 경우 <code class="language-plaintext highlighter-rouge">&lt;About /&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;Usee /&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;NoMatch /&gt;</code>가 전부 렌더링된다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;About /&gt;</code>만 렌더링하기 위해서 <code class="language-plaintext highlighter-rouge">Switch</code>컴포넌트로 감싸면 된다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">Switch</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">exact</span> <span class="nx">path</span><span class="o">=</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Home</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/Route</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">"</span><span class="s2">/about</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">About</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/Route</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="dl">"</span><span class="s2">/:user</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">User</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/Route</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">Route</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">NoMatch</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/Route</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/Switch</span><span class="err">&gt;
+</span></code></pre></div></div>
+:ET

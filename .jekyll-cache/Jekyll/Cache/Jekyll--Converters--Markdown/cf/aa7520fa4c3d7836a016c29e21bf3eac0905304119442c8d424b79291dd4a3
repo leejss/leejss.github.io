@@ -1,0 +1,79 @@
+I"*<h2 id="why-immer">why immer?</h2>
+
+<p>immer는 불변 객체의 내용을 수정하는 경우에 사용한다. 불변 객체의 내용을 수정하여 새로운 불변 객체를 만들어 낸다.</p>
+
+<p>리엑트에서 렌더링을 위해 원래 객체 또는 배열의 내용을 바꾸지 않고 새로운 객체 또는 배열을 생성해야 한다.</p>
+
+<p>객체의 내용이 또 다른 객체나 배열로 이루어져 있으면 해당 내용만 복사한 새로운 객체를 만들기 위해 불편함이 따른다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">a</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">id</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="na">b</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">id</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="p">}</span>   
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">newObj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">...</span><span class="nx">obj</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>       <span class="c1">//{ a: { id: 1 }, b: { id: 2 } }</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">newObj</span><span class="p">);</span>    <span class="c1">//{ a: { id: 1 }, b: { id: 2 } }</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>       <span class="c1">//{ a: { id: 10 }, b: { id: 2 } }</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">newObj</span><span class="p">);</span>    <span class="c1">//{ a: { id: 10 }, b: { id: 2 } }</span>
+
+</code></pre></div></div>
+
+<p>불변성을 유지하면서 객체를 생성하기 위해 전개 연산자를 사용했지만 객체 내부 객체는 깊은 복사가 이루어지지 않아 불변성이 깨지는 것을 확인할 수 있다. 이렇게 객체 구조가 복잡하면 전개 연산자만으로 불변성을 유지하기 귀찮아진다.</p>
+
+<p>이러한 귀찮음을 해결하기 위해 <strong>immer</strong> 라이브러리를 활용한다.</p>
+
+<h2 id="produce">produce</h2>
+
+<p>immer는 불변성을 유지하면서 객체를 수정하기 위한 함수 <code class="language-plaintext highlighter-rouge">produce</code>를 제공한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">produce(currentState, producer)</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">produce</code>함수의 첫번째 파라미터는 현재 상태고 두번째 파라미터는 해상 상태를 업데이트할 producer함수다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">currentState</code>는 바꾸지 않은 채 새로운 상태를 리턴한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">studentList</span> <span class="o">=</span>  <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">James</span><span class="dl">"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Lina</span><span class="dl">"</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="kd">const</span> <span class="nx">nextStudentList</span> <span class="o">=</span> <span class="nx">produce</span><span class="p">(</span><span class="nx">studentList</span><span class="p">,</span> <span class="nx">draft</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">student</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Smith</span><span class="dl">"</span><span class="p">}</span>
+    <span class="nx">draft</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">student</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>두번째 매개변수인 <code class="language-plaintext highlighter-rouge">producer</code>함수의 파라미터 <code class="language-plaintext highlighter-rouge">draft</code>는 <code class="language-plaintext highlighter-rouge">currentState</code>를 가리키는 proxy역할을 한다.</p>
+
+<h2 id="curried-producer">curried producer</h2>
+
+<p><code class="language-plaintext highlighter-rouge">produce</code>함수의 파라미터로 함수를 준다면 업데이트 함수를 반환한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">const</span> <span class="nx">updateValue</span> <span class="o">=</span> <span class="nx">produce</span><span class="p">(</span><span class="nx">draft</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">draft</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="p">})</span>
+
+<span class="kd">const</span> <span class="nx">original</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">value</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">nextState</span> <span class="o">=</span> <span class="nx">updateValue</span><span class="p">(</span><span class="nx">original</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">nextState</span><span class="p">)</span> <span class="c1">// {value: 10}</span>
+</code></pre></div></div>
+:ET

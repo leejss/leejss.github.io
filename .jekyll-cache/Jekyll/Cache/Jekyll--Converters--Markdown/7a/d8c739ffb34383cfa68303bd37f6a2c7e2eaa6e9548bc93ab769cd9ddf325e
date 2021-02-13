@@ -1,0 +1,42 @@
+I"�<h2 id="조건부-렌더링이란">조건부 렌더링이란</h2>
+
+<p>조건부 렌더링이란 특정 조건에 따라서 화면에 보여지는 부분을 다르게 렌더링 하는 것을 말한다.</p>
+
+<p>React 컴포넌트에서 화면에 보여지는 부분을 구성하는 것은, <code class="language-plaintext highlighter-rouge">render()</code>함수의 <code class="language-plaintext highlighter-rouge">return</code> 부분이다.</p>
+
+<p>특정 변수의 값에 따라서 렌더링 하기 위한 방법 중 간단한 방법은 <code class="language-plaintext highlighter-rouge">&amp;&amp;</code> 연산자를 이용한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{변수 &amp;&amp; UI부분}
+</code></pre></div></div>
+
+<p>변수값이 true면 UI부분을 렌더링 하고 false면 렌더링하지 않는다.</p>
+
+<h2 id="example">Example</h2>
+
+<p>플래그 변수에 따라서 화면을 visible/invisible 하게 바꾸는 버튼</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// import 생략</span>
+
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Sample</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">msg</span><span class="p">,</span> <span class="nx">setMsg</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">"</span><span class="s2">Message</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">flag</span><span class="p">,</span> <span class="nx">setFlag</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">handleClick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setFlag</span><span class="p">(</span><span class="o">!</span><span class="nx">flag</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">flag</span> <span class="o">&amp;&amp;</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">msg</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span><span class="si">}</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">handleClick</span><span class="si">}</span><span class="p">&gt;</span>Switch<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Sample</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+:ET

@@ -1,9 +1,0 @@
-I";<h2 id="컴포넌트-메소드">컴포넌트 메소드</h2>
-
-<p>컴포넌트에 메소드를 추가하여 이벤트 헨들러로 등록할 수 있다.</p>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Example</span>
-
-
-</code></pre></div></div>
-:ET

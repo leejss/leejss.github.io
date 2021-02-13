@@ -1,0 +1,85 @@
+I"l<h2 id="sharing-data-with-other-components">Sharing data with other components</h2>
+
+<p>부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달하기 위해서 <code class="language-plaintext highlighter-rouge">props</code>를 사용한다</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">class</span> <span class="nx">부모컴포넌트</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span> 
+    <span class="nx">construcotr</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span><span class="na">x</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">자식컴포넌트</span> <span class="nx">cord</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="render-props">Render props</h2>
+
+<p>‘리엑트를 다루는 기술’이라는 책을 읽던 중 <code class="language-plaintext highlighter-rouge">render props</code>에 대해</p>
+
+<p>다음 코드를 살펴보자 (다음부터 등장할 코드는 React의 공식문서에 나와 있는 render props예시다.)</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// Mouse.js ------------------------------------</span>
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">Mouse</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">handleMouseMove</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleMouseMove</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">0</span> <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 마우스의 움직임을 추적해서 state에 업데이트 한다.</span>
+  <span class="nx">handleMouseMove</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="na">x</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientX</span><span class="p">,</span>
+      <span class="na">y</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientY</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">style</span><span class="o">=</span> <span class="nx">onMouseMove</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleMouseMove</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="cm">/* &lt;p&gt; 태그 대신 이 기능을 다른 컴포넌트에 적용할 수 없을까? */</span><span class="p">}</span>
+        <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">)}</span>
+      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Mouse</span><span class="p">;</span>
+
+<span class="c1">// MouseTracker.js ------------------------------------</span>
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Mouse</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Mouse</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">MouseTracker</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;&gt;</span>
+        <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Move</span> <span class="nx">the</span> <span class="nx">mouse</span> <span class="nx">around</span><span class="o">!&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Mouse</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">MouseTracker</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<p>데이터를 제공하는 컴포넌트
+데이터를 사용하여 렌더링하는 컴포넌트</p>
+
+<p>Sharing the state or behavior</p>
+
+<p>마우스 포인터를 추적하고 결과를 렌더링하는 컴포넌트</p>
+
+<p>마우스를 추적하는 행위를 캡슐화하여 다른 컴포넌트에도 사용하고 싶다</p>
+
+:ET

@@ -1,0 +1,201 @@
+I"MK<h2 id="sharing-data-with-other-components">Sharing data with other components</h2>
+
+<p>부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달하기 위해서 <code class="language-plaintext highlighter-rouge">props</code>를 사용한다</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">class</span> <span class="nx">Parent</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span> 
+    <span class="nx">construcotr</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span><span class="na">x</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nc">Child</span> <span class="na">cord</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="si">}</span><span class="p">&gt;</span>
+        )
+    }
+}
+</code></pre></div></div>
+
+<h2 id="render-props">Render props</h2>
+
+<p>‘리엑트를 다루는 기술’이라는 책을 읽던 중 <code class="language-plaintext highlighter-rouge">render props</code>에 대해 나왔다.</p>
+
+<p>단번에 이해가 되지 않아서 공식 문서를 참고해 공부해보았다.</p>
+
+<p>먼저 <code class="language-plaintext highlighter-rouge">render props</code>는 <em>render props technique</em> 또는 <em>render props pattern</em>을 말하는 것으로</p>
+
+<p>여기서 <code class="language-plaintext highlighter-rouge">render</code>라는 이름은 관습적으로 지칭하는, 함수를 받는 <code class="language-plaintext highlighter-rouge">props</code>객체 안 필드를 말한다. (라이프 사이클 함수인 render()와 같은 것이 아니다. render()는 메소드이고 <code class="language-plaintext highlighter-rouge">render props</code>의 <code class="language-plaintext highlighter-rouge">render</code>는 props필드 이름이다.)</p>
+
+<p>다음 코드를 보면 무슨 말인이 조금 이해가 갈 것이다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ParentComponent.js</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ChildComponent</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./ChildComponent</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">ParentComponent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">ChildComponent</span> <span class="na">render</span><span class="p">=</span><span class="si">{</span><span class="p">(</span><span class="nx">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">number</span> <span class="o">+</span> <span class="mi">2</span><span class="si">}</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ParentComponent</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ChildComponent.js</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">ChildComponent</span> <span class="o">=</span> <span class="p">({</span><span class="nx">render</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="si">{</span><span class="nx">render</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span> <span class="si">{</span><span class="cm">/* 렌더링 시 화면에 4가 출력된다.*/</span><span class="si">}</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ChildComponent</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>사실 보면 알겠지만 함수를 받기 위해 render라는 이름을 굳이 안써도 된다. 하지만 render라고 쓰는 이유는 해당 props의 역할을 명확하게 하기 위해서 인 것 같다.</p>
+
+<h2 id="언제-쓰는-것인가">언제 쓰는 것인가?</h2>
+
+<p>다른 컴포넌트에 함수를 넘겨주는 경우는 어떤 경우인가?</p>
+
+<p>다음 코드를 살펴보자 (지금부터 나오는 코드는 React의 공식문서에 나와 있는 render props예시다.)</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// Mouse.js ------------------------------------</span>
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">Mouse</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">handleMouseMove</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleMouseMove</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">0</span> <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 마우스의 움직임을 추적해서 state에 업데이트 한다.</span>
+  <span class="nx">handleMouseMove</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="na">x</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientX</span><span class="p">,</span>
+      <span class="na">y</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientY</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">onMouseMove</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleMouseMove</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="cm">/* 함수의 인자로 state객체를 넘긴다. */</span><span class="si">}</span>
+        <span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Mouse</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// MouseTracker.js ------------------------------------</span>
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Mouse</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Mouse</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">MouseTracker</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Move the mouse around!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Mouse</span> <span class="na">render</span><span class="p">=</span><span class="si">{</span><span class="p">(</span><span class="nx">mouse</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{}</span><span class="si">}</span> <span class="p">/&gt;</span> <span class="si">{</span><span class="cm">/* 이런 식으로 함수가 전달 된다. */</span><span class="si">}</span>
+      <span class="p">&lt;/&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">MouseTracker</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Mouse</code> 컴포넌트는 마우스의 움직임을 추적하여 state객체에 값을 업데이트한다. 그리고 그 값을 <code class="language-plaintext highlighter-rouge">props</code>로 받는 <code class="language-plaintext highlighter-rouge">render</code>라는 함수에 인자로 넘긴다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">render props</code>를 이용하여 다른 컴포넌트에서 <code class="language-plaintext highlighter-rouge">Mouse</code> 컴포넌트에서 구현한 기능(마우스 추적기능)을 사용할 수 있다.</p>
+
+<p>다음 코드를 살펴보자</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ReactLogo.js</span>
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">ReactLogo</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">mouse</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">mouse</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">style</span> <span class="o">=</span> <span class="p">{</span> <span class="na">position</span><span class="p">:</span> <span class="dl">"</span><span class="s2">absolute</span><span class="dl">"</span><span class="p">,</span> <span class="na">left</span><span class="p">:</span> <span class="nx">mouse</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="na">top</span><span class="p">:</span> <span class="nx">mouse</span><span class="p">.</span><span class="nx">y</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">img</span>
+        <span class="na">src</span><span class="p">=</span><span class="s">"/logo192.png"</span> <span class="c1">// react logo</span>
+        <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="nx">style</span><span class="si">}</span>
+        <span class="na">alt</span><span class="p">=</span><span class="s">"logo"</span>
+      <span class="p">/&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ReactLogo</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>위 컴포넌트는 특정 absoluti position에 react 로고를 띄우는 컴포넌트다. <code class="language-plaintext highlighter-rouge">mouse</code>라는 props을 받고, 그 객체의 x와 y를 이용하여 로고의 위치를 계산한다. 위 컴포넌트와 <code class="language-plaintext highlighter-rouge">mouse</code>컴포넌트의 기능을 결합하기 위해서 render props 테크닉을 이용한다.</p>
+
+<p>MouseTracker.js를 다음과 같이 수정한다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// MouseTracker.js ------------------------------------</span>
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Mouse</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Mouse</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ReactLogo</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./ReactLogo</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">MouseTracker</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Move the mouse around!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Mouse</span> <span class="na">render</span><span class="p">=</span><span class="si">{</span><span class="p">(</span><span class="nx">mouse</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="o">&lt;</span><span class="nx">ReactLogo</span> <span class="nx">mouse</span><span class="o">=</span><span class="p">{</span><span class="nx">mouse</span><span class="p">}</span> <span class="sr">/&gt;}} /</span><span class="o">&gt;</span> 
+      <span class="p">&lt;/&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="si">}</span>
+
+<span class="na">export</span> <span class="na">default</span> <span class="na">MouseTracker</span><span class="err">;</span>
+</code></pre></div></div>
+
+<p>마우스 추적 기능을 가진 <code class="language-plaintext highlighter-rouge">Mouse</code> 컴포넌트에 그 기능을 이용하여 화면에 렌더링을 수행할 다른 컴포넌트를 결합한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">props</code>에 함수를 전달함으로써 무엇을 렌더링 할 것인지 결정할 수 있다.</p>
+
+<h2 id="children-을-이용한-render-props">children 을 이용한 render props</h2>
+
+<p>다음과 같은 형태도 render props이다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// import 생략</span>
+
+<span class="kd">const</span> <span class="nx">MyComponent</span> <span class="o">=</span> <span class="p">({</span><span class="nx">children</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">children</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+
+<span class="p">&lt;</span><span class="nc">MyComponent</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">value</span> <span class="o">=&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="nx">value</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">MyComponent</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">MyComponent</code>는 컴포넌트 사이에 함수를 받아 인자로 2를 넘긴다.</p>
+
+<p>컴포넌트 사이에 <code class="language-plaintext highlighter-rouge">{value =&gt; 2 * value}</code>는 인자에 2를 곱해서 반환하는 함수를 넣는다.</p>
+
+<p>해당 함수는 props.children을 통해서 MyComponet로 넘어가서 계산을 수행하여</p>
+
+<div>
+    4
+  </div>
+:ET
