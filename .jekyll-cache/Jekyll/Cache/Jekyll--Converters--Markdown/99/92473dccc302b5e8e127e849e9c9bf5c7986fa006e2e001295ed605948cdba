@@ -1,0 +1,101 @@
+I"�<h2 id="context-이용">context 이용</h2>
+
+<p>context를 이용하여 컴포넌트 트리 전체에 데이터를 제공한다.</p>
+
+<h2 id="createcontext">createContext</h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">createContext</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span> 
+
+<span class="kd">const</span> <span class="nx">SampleContext</span> <span class="o">=</span> <span class="nx">createContext</span><span class="p">({</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">black</span><span class="dl">'</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>context객체를 생성한다.</p>
+
+<p>매개변수로 default context 객체를 받는다.</p>
+
+<p>Provider에 의해 value를 전달받지 못한 경우 default value가 쓰인다.</p>
+
+<h2 id="contextprovider">Context.Provider</h2>
+
+<p><code class="language-plaintext highlighter-rouge">value</code>를 통해 context객체에 값을 채운다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="p">&lt;</span><span class="nc">SampleContext</span><span class="p">.</span><span class="nc">Provider</span> <span class="na">value</span><span class="p">=&gt;</span>
+    <span class="si">{</span><span class="cm">/*이안의 컴포넌트가 SampleContext에 접근할 때 color의 값은 orange다.*/</span><span class="si">}</span>
+<span class="p">&lt;/</span><span class="nc">SampleContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+
+</code></pre></div></div>
+
+<p>함수를 전달하여 context 객체의 값을 동적으로 바꿀 수 있다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// import 생략</span>
+
+<span class="kd">const</span> <span class="nx">SampleProvider</span> <span class="o">=</span> <span class="p">({</span><span class="nx">children</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// context와 동일한 state정의</span>
+    <span class="kd">const</span> <span class="p">[</span><span class="nx">color</span><span class="p">,</span> <span class="nx">setColor</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">'</span><span class="s1">black</span><span class="dl">'</span><span class="p">)</span>
+    <span class="kd">const</span> <span class="nx">value</span> <span class="o">=</span><span class="p">{</span>
+        <span class="na">state</span><span class="p">:</span> <span class="p">{</span><span class="nx">color</span><span class="p">},</span>
+        <span class="na">actions</span><span class="p">:</span> <span class="p">{</span><span class="nx">setColor</span><span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">SampleContext</span><span class="p">.</span><span class="nc">Provider</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">value</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">children</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">SampleContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// Provider로 감싸인 컴포넌트는 color를 업데이트하는 setColor에 접근할 수 있다. </span>
+<span class="c1">// export 생략</span>
+</code></pre></div></div>
+
+<p>이제 <code class="language-plaintext highlighter-rouge">&lt;SampleContext.Provider&gt;</code> 대신 <code class="language-plaintext highlighter-rouge">&lt;SampleProvider&gt;</code>를 사용하면 된다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">SampleProvider</span><span class="p">&gt;</span>
+
+    <span class="si">{</span><span class="cm">/*context를 이용하는 컴포넌트*/</span><span class="si">}</span> 
+
+<span class="p">&lt;/</span><span class="nc">SampleProvider</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<h2 id="contextconsumer">Context.Consumer</h2>
+
+<p>context 객체의 값에 접근하기 위해 사용한다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">SampleContext</span><span class="p">.</span><span class="nc">Consumer</span><span class="p">&gt;</span>
+
+    <span class="si">{</span><span class="cm">/* context객체의 값을 가지고 무엇을 할 것인지 정의하는 함수가 들어가야 한다.*/</span><span class="si">}</span>
+
+<span class="p">&lt;/</span><span class="nc">SampleContext</span><span class="p">.</span><span class="nc">Consumer</span><span class="p">&gt;</span>
+
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Consumer</code>사이에는 어떻게 context객체를 이용할 것인지 정하는 함수가 들어가야 한다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// example</span>
+<span class="p">&lt;</span><span class="nc">SampleContext</span><span class="p">.</span><span class="nc">Consumer</span><span class="p">&gt;</span>
+    <span class="si">{</span><span class="p">({</span><span class="nx">state</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="p">=&gt;</span>
+            sample
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span><span class="si">}</span>
+<span class="p">&lt;/</span><span class="nc">SampleContext</span><span class="p">.</span><span class="nc">Consumer</span><span class="p">&gt;</span>
+
+</code></pre></div></div>
+
+<h2 id="usecontext">useContext</h2>
+
+<p>함수형 컴포넌트에서 context를 보다 쉽게 사용할 수 있는 hook을 제공한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Consumer</code>대신 <code class="language-plaintext highlighter-rouge">useContext</code>를 사용하면 보다 깔끔해진다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">const</span> <span class="p">{</span><span class="nx">state</span><span class="p">}</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">SampleContext</span><span class="p">)</span>
+
+<span class="c1">// 이 아래부터 context의 state를 사용할 수 있다.</span>
+<span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="sr">/{color: state.color}}</span><span class="err">&gt;
+</span>        <span class="nx">sample</span>
+    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="p">)</span>
+
+</code></pre></div></div>
+:ET

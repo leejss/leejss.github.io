@@ -33,7 +33,8 @@ Provider에 의해 value를 전달받지 못한 경우 default value가 쓰인�
 
 ~~~jsx
 
-<SampleContext.Provider value={{color: 'orange'}}>
+<SampleContext.Provider value={
+    {color: 'orange'}}>
     {/*이안의 컴포넌트가 SampleContext에 접근할 때 color의 값은 orange다.*/}
 </SampleContext.Provider>
 
@@ -88,7 +89,8 @@ context 객체의 값에 접근하기 위해 사용한다.
 // example
 <SampleContext.Consumer>
     {({state}) => (
-        <div style={{color: state.color}}>
+        <div style={
+            {color: state.color}}>
             sample
         </div>
     )}
@@ -108,7 +110,9 @@ const {state} = useContext(SampleContext)
 
 // 이 아래부터 context의 state를 사용할 수 있다.
 return (
-    <div style={{color: state.color}}>
+    <div style={
+        {color: state.color}
+    }>
         sample
     </div>
 )
