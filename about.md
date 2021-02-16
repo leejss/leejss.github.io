@@ -1,7 +1,5 @@
 ---
-layout: page
-title: About
+layout: about
+title: About me
 sidebar_link: true
 ---
-Email: <goldemshine@gmail.com>
-
