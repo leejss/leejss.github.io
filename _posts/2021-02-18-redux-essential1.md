@@ -135,5 +135,3 @@ state객체에서 특정 값을 가져오는 함수
 const selectCounterValue = state => state.value
 
 ```
-
-
