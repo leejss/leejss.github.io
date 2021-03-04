@@ -18,9 +18,9 @@ tags:
 
 **react-virtualized**는 컴포넌트의 모습에 따라 다른 사용방식을 제공하는데 여기서는 `List` 컴포넌트를 예로 든다. 라이브러리에서 제공하는 `List`는 실제 컴포넌트가 아닌 virtualized 컴포넌트이다.
 
-~~~javascript
+```javacsript
 import {List} from 'react-virtualized'
-~~~
+```
 
 ### rowRenderer
 

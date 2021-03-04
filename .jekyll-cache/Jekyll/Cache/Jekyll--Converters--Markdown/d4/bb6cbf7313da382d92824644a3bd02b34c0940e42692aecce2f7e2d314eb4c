@@ -1,0 +1,128 @@
+I"5<h2 id="what-is-redux">What is Redux?</h2>
+
+<p>Redux: action 이벤트를 이용하여 애플리케이션 state(global state)를 업데이트하고 관리하는 라이브러리</p>
+
+<h2 id="redux와-함께-쓰이는-라이브러리">Redux와 함께 쓰이는 라이브러리</h2>
+
+<ul>
+  <li>react-redux</li>
+  <li>redux-toolkit</li>
+  <li>Redux DevTools Extension</li>
+</ul>
+
+<h2 id="concept">Concept</h2>
+
+<p>Redux store안에 global state를 보관하고 action을 통해서 state를 업데이트 한다.</p>
+
+<p>one-way data flow: action -&gt; state -&gt; view</p>
+
+<p>다수의 컴포넌트가 동일한 state를 공유해야 하는 경우, Redux를 이용한다.</p>
+
+<h2 id="immutability">Immutability</h2>
+
+<p>Redux에서 일어나는 state의 업데이트는 기존 state를 바꾸지 않고 기존 state를 copy한 후 copy한 state를 업데이트하여 반환해야 한다.</p>
+
+<blockquote>
+  <blockquote>
+    <p>Redux expects that all state updates are done immutably</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="terminology">Terminology</h2>
+
+<h3 id="action">Action</h3>
+
+<p><code class="language-plaintext highlighter-rouge">type</code> 필드을 가지고 있는 객체</p>
+
+<p>어떤 action인지 알려주는 객체다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//example</span>
+<span class="p">{</span>
+    <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">counter/INCREMENT</span><span class="dl">"</span>
+<span class="p">}</span>
+
+<span class="p">{</span>
+    <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">counter/INCREMENTBYAMOUNT</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">payload</span><span class="p">:</span> <span class="mi">10</span> <span class="c1">// extra information</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h3 id="action-creator">Action creator</h3>
+
+<p>action 객체를 반환하는 함수</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">const</span> <span class="nx">increment</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">counter/INCREMENT</span><span class="dl">"</span>
+<span class="p">})</span>
+
+<span class="c1">// dispatch(increment())</span>
+
+<span class="kd">const</span> <span class="nx">incrementByAmount</span> <span class="o">=</span> <span class="p">(</span><span class="nx">amount</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">counter/INCREMENTBYAMOUNT</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">payload</span><span class="p">:</span> <span class="nx">amount</span>
+<span class="p">})</span>
+
+<span class="c1">// dispatch(incrementByAmount(10))</span>
+
+</code></pre></div></div>
+
+<h3 id="reducers">Reducers</h3>
+
+<p>기존의 state와 action 객체를 받아서 새로운 state를 반환하는 함수</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">const</span> <span class="nx">counterReducer</span><span class="p">(</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span><span class="na">value</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="dl">"</span><span class="s2">counter/INCREMENT</span><span class="dl">"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="p">...</span><span class="nx">state</span><span class="p">,</span> <span class="c1">// rest</span>
+                <span class="na">value</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="p">}</span>
+        <span class="k">case</span> <span class="dl">"</span><span class="s2">counter/INCREMENTBYAMOUNT</span><span class="dl">"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="p">...</span><span class="nx">state</span><span class="p">,</span> 
+                <span class="na">value</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span>
+            <span class="p">}</span>
+        <span class="nl">default</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nx">state</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h3 id="store">store</h3>
+
+<p>Redux application state를 보관하는 객체</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// store 생성</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">configureStore</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@reduxjs/toolkit</span><span class="dl">'</span>
+<span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">configureStore</span><span class="p">({</span><span class="na">reducer</span><span class="p">:</span> <span class="nx">counterReducer</span><span class="p">})</span>
+
+<span class="c1">// store 가져오기</span>
+<span class="nx">store</span><span class="p">.</span><span class="nx">getStore</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<h3 id="dispatch">dispatch</h3>
+
+<p>store의 method</p>
+
+<p>state의 update를 담당하는 함수. action creator와 함께 쓰인다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// store.dispatch(action객체)</span>
+
+<span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">increment</span><span class="p">())</span>
+
+</code></pre></div></div>
+
+<h3 id="selector">selector</h3>
+
+<p>state객체에서 특정 값을 가져오는 함수</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">const</span> <span class="nx">selectCounterValue</span> <span class="o">=</span> <span class="nx">state</span> <span class="o">=&gt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">value</span>
+
+</code></pre></div></div>
+:ET

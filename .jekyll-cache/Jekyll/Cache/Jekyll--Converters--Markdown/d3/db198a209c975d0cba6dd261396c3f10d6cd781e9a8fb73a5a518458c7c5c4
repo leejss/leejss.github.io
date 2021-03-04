@@ -1,0 +1,220 @@
+I"4<h2 id="create-basic-counter-react--redux-app">Create Basic Counter React + Redux app</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx create-react-app basic-counter <span class="nt">--template</span> redux
+</code></pre></div></div>
+
+<h2 id="app-structure">App structure</h2>
+
+<ul>
+  <li>/src
+    <ul>
+      <li>index.js : starting point of App</li>
+      <li>App.js: the top-level React component</li>
+      <li>/app
+        <ul>
+          <li>store.js: Redux store instance</li>
+        </ul>
+      </li>
+      <li>/features
+        <ul>
+          <li>/counter
+            <ul>
+              <li>Coutner.js: React component that shows the UI for the counter feature</li>
+              <li>coutnerSlice.js: the Redux logic for the counter feature</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="creating-the-redux-store">Creating the Redux Store</h2>
+
+<p>Redux toolkit의 <code class="language-plaintext highlighter-rouge">configureStore()</code>를 이용하여 store 생성</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">configureStore</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@reduxjs/toolkit</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">counterReducer</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../features/counter/counterSlice</span><span class="dl">'</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">configureStore</span><span class="p">({</span>
+  <span class="na">reducer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">counter</span><span class="p">:</span> <span class="nx">counterReducer</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>인자로 reducer를 받음.</p>
+
+<p>앱 내, 다양한 reducers를 객체에 담아 전달한다.</p>
+
+<p>reduer 객체의 key 이름은 state객체 내 key 이름으로 설정된다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="nx">confiugreStore</span><span class="p">({</span>
+    <span class="na">reducer</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">coutner</span><span class="p">:</span> <span class="nx">counterReducer</span><span class="p">,</span> 
+        <span class="na">todo</span><span class="p">:</span> <span class="nx">todoReducer</span><span class="p">,</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="cm">/*
+    state.counter,
+    state.todo 
+    로 설정된다.
+
+*/</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">counterReducer</code>가 <code class="language-plaintext highlighter-rouge">state.counter</code>의 업데이트를 담당하게 된다.</p>
+
+<h2 id="redux-slices">Redux slices</h2>
+
+<blockquote>
+  <blockquote>
+    <p>A “slice” is a collection of Redux reducer logic and actions for a single feature in your app,</p>
+  </blockquote>
+</blockquote>
+
+<p>reducer와 action을 정의한 object</p>
+
+<p>store는 여러 개의 ‘slices’ of state로 이루어져 있다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="nx">configureStore</span><span class="p">({</span>
+  <span class="na">reducer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">users</span><span class="p">:</span> <span class="nx">usersReducer</span><span class="p">,</span>
+    <span class="na">posts</span><span class="p">:</span> <span class="nx">postsReducer</span><span class="p">,</span>
+    <span class="na">comments</span><span class="p">:</span> <span class="nx">commentsReducer</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">users</code>, <code class="language-plaintext highlighter-rouge">posts</code>, <code class="language-plaintext highlighter-rouge">comments</code>는 각각 Redux store의 slice다.</p>
+
+<p>slice에 대응하는 reducer를 slice reducer라 한다.</p>
+
+<h3 id="combinereducer">combineReducer()</h3>
+
+<p><code class="language-plaintext highlighter-rouge">store</code>는 하나의 <code class="language-plaintext highlighter-rouge">rootReduer</code>가 필요하다.</p>
+
+<p>각각의 slice reducers를 하나의 rootReducer에 담는 과정이 필요하다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">rootReducer</span> <span class="o">=</span> <span class="nx">combineReducers</span><span class="p">({</span>
+  <span class="na">users</span><span class="p">:</span> <span class="nx">usersReducer</span><span class="p">,</span> <span class="c1">// slice: sliceReducer</span>
+  <span class="na">posts</span><span class="p">:</span> <span class="nx">postsReducer</span><span class="p">,</span>
+  <span class="na">comments</span><span class="p">:</span> <span class="nx">commentsReducer</span>
+<span class="p">})</span>
+
+<span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">configureStore</span><span class="p">({</span>
+    <span class="na">reducer</span><span class="p">:</span> <span class="nx">rootReducer</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">combineReducer()</code>를 이용하여 rootReducer를 생성한다.</p>
+
+<h3 id="configurestore">configureStore()</h3>
+
+<p><code class="language-plaintext highlighter-rouge">configureStore()</code>에 slice reducer를 각각 넘겨도 내부에서 combine해준다.</p>
+
+<p>따라서 코드를 줄일 수 있다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">configureStore</span><span class="p">({</span>
+  <span class="na">reducer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">users</span><span class="p">:</span> <span class="nx">usersReducer</span><span class="p">,</span>
+    <span class="na">posts</span><span class="p">:</span> <span class="nx">postsReducer</span><span class="p">,</span>
+    <span class="na">comments</span><span class="p">:</span> <span class="nx">commentsReducer</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+</code></pre></div></div>
+
+<h2 id="creating-slice-reducers-and-actions">Creating Slice Reducers and Actions</h2>
+
+<p>각각의 slice를 담당하는 모듈을 만든다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>postSlice.js
+useSlice.js
+commentSlice.js
+...
+</code></pre></div></div>
+
+<h3 id="create-slice">Create slice</h3>
+
+<p>Redux toolkit의 <code class="language-plaintext highlighter-rouge">createSlice()</code>함수를 이용하여 slice를 생성한다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">counterSlice</span> <span class="o">=</span> <span class="nx">createSlice</span><span class="p">({</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">counter</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// slice name</span>
+  <span class="na">initialState</span><span class="p">:</span> <span class="p">{</span> <span class="c1">// 초기값</span>
+    <span class="na">value</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="c1">// slice reducers</span>
+  <span class="na">reducers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">increment</span><span class="p">:</span> <span class="nx">state</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="na">decrement</span><span class="p">:</span> <span class="nx">state</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">value</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="na">incrementByAmount</span><span class="p">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">createSlice()</code>에 slice정보를 담은 객체를 전달하면 action, action creator, reducer를 생성한다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// action</span>
+<span class="p">{</span>
+    <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">counter/increment</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="p">{</span>
+    <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">counter/decrement</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="p">{</span>
+    <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">counter/incrementByAmount</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">paylaod</span><span class="p">:</span> <span class="nx">amount</span>
+<span class="p">}</span>
+<span class="c1">// action creator</span>
+<span class="nx">increment</span><span class="p">()</span> <span class="c1">// reutrn {type: "counter/increment"}</span>
+<span class="nx">decrement</span><span class="p">()</span> <span class="c1">// return {type: "counter/decrement"}</span>
+<span class="nx">incrementByAmount</span><span class="p">(</span><span class="nx">amount</span><span class="p">)</span> <span class="c1">// return {type: "counter/incrementByAmount", paylaod: amount}</span>
+
+<span class="c1">// reducer</span>
+<span class="kd">const</span> <span class="nx">counterReducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="o">=</span><span class="p">{</span><span class="na">value</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">createSlice()</code>에서 reducer를 작성할 때 내부에서 불변성을 유지하기 때문에 직접 state를 바꾸는 코딩이 가능하다.</p>
+
+<blockquote>
+  <blockquote>
+    <p>createSlice uses a library called Immer inside.</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="useselector-and-usedispatch">useSelector and useDispatch</h2>
+
+<p>state 안 값을 가져오기 위해 <code class="language-plaintext highlighter-rouge">useSelector()</code>를 이용한다.</p>
+
+<blockquote>
+  <blockquote>
+    <p>the useSelector hook lets our component extract whatever pieces of data it needs from the Redux store state.</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Counter.js</span>
+
+<span class="kd">const</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">useSelector</span><span class="p">(</span><span class="nx">state</span><span class="o">=&gt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">counter</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>store에 dispatch하기 위해 <code class="language-plaintext highlighter-rouge">useDispatch()</code>를 이용한다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">dispatch</span> <span class="o">=</span> <span class="nx">useDispatch</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="참고">참고</h2>
+
+<p><a href="https://ko.redux.js.org/tutorials/essentials/part-2-app-structure">Redux Essential</a></p>
+:ET

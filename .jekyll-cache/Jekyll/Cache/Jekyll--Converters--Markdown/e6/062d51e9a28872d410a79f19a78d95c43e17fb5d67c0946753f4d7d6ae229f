@@ -1,4 +1,4 @@
-I"m%<h2 id="언제-react-virtualized가-필요한가">언제 react-virtualized가 필요한가</h2>
+I"e$<h2 id="언제-react-virtualized가-필요한가">언제 react-virtualized가 필요한가</h2>
 
 <p><strong>react-virtualized</strong>는 리엑트의 렌더링 최적화에 사용한다. 컴포넌트의 내용이 많을 경우 한꺼번에 렌더링하지 않고 화면에 보이는 부분만 렌더링하기 위해 사용한다.</p>
 
@@ -10,8 +10,8 @@ yarn add react-virtualized
 
 <p><strong>react-virtualized</strong>는 컴포넌트의 모습에 따라 다른 사용방식을 제공하는데 여기서는 <code class="language-plaintext highlighter-rouge">List</code> 컴포넌트를 예로 든다. 라이브러리에서 제공하는 <code class="language-plaintext highlighter-rouge">List</code>는 실제 컴포넌트가 아닌 virtualized 컴포넌트이다.</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">List</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-virtualized</span><span class="dl">'</span>
-</code></pre></div></div>
+<pre><code class="language-javacsript">import {List} from 'react-virtualized'
+</code></pre>
 
 <h3 id="rowrenderer">rowRenderer</h3>
 
