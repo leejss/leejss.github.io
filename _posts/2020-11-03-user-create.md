@@ -1,14 +1,7 @@
 ---
 layout: post 
 title: 유저모델 만들기(Creating a User model)
-categories: Post
-tags: 
-- TIL
-- express.js
-- Node.js
-- mogodb
-- Mongoose
----
+
 
 ## 순서
 

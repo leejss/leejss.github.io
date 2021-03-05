@@ -1,10 +1,6 @@
 ---
 layout: post 
 title: Mongodb CRUD methods
-categories: Post 
-tags: 
-- TIL
-- Mongodb
 ---
 
 ## Mongodb data

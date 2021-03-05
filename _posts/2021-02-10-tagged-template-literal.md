@@ -1,11 +1,6 @@
 ---
 layout: post 
 title: Tagged Template Literals 
-categories: Post 
-tags: 
-- TIL
-- ES6
-- Javascript
 ---
 
 ## Template Literal

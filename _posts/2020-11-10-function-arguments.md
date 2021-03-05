@@ -1,10 +1,6 @@
 ---
 layout: post 
 title: Argument - Keywords vs Default argument - 1
-categories: Post
-tags: 
-- TIL
-- Python
 ---
 
 ## 1. Argument 유형

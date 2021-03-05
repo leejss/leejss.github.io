@@ -1,11 +1,6 @@
 ---
 layout: post 
 title: Redux Essentials, Part 1
-categories: Post 
-tags: 
-- TIL
-- React
-- Redux
 ---
 
 ## What is Redux?

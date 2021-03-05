@@ -1,10 +1,6 @@
 ---
 layout: post 
 title: React - Render props
-categories: Post 
-tags: 
-- TIL
-- React
 ---
 
 ## Sharing data with other components

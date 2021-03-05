@@ -1,10 +1,6 @@
 ---
 layout: post 
 title: LEGB rule
-categories: Post 
-tags: 
-- TIL
-- python
 ---
 
 ## Scope

@@ -1,10 +1,6 @@
 ---
 layout: post 
 title: React - Basic Hooks - 1
-categories: Post 
-tags: 
-- TIL
-- React
 ---
 
 ## Hooks

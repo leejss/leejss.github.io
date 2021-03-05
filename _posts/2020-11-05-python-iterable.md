@@ -1,10 +1,6 @@
 ---
 layout: post 
 title: iterable과 iterator
-categories: Post 
-tags: 
-- TIL
-- python
 ---
 
 ## 1. Iteration

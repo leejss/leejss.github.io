@@ -1,10 +1,6 @@
 ---
 layout: post 
 title: React - Context API
-categories: Post 
-tags: 
-- TIL
-- React
 ---
 
 ## context 이용

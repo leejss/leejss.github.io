@@ -1,10 +1,6 @@
 ---
 layout: post 
 title: React - 조건부 렌더링
-categories: Post 
-tags: 
-- TIL
-- React
 ---
 
 ## 조건부 렌더링이란

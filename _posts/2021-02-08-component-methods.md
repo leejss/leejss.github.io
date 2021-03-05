@@ -1,10 +1,6 @@
 ---
 layout: post 
 title: React - 컴포넌트에 method 추가하기
-categories: Post 
-tags: 
-- TIL
-- React
 ---
 
 ## 컴포넌트 메소드

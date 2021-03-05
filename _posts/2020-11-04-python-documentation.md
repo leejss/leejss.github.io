@@ -1,10 +1,6 @@
 ---
 layout: post 
 title: 궁금한 거 파이썬에게 직접 물어보기(Python Documentation Sources)
-categories: Post 
-tags: 
-- TIL
-- python
 ---
 
 ## 1. `dir` function

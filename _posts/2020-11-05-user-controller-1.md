@@ -1,14 +1,6 @@
 ---
 layout: post 
 title: 유저컨트롤러 만들기(Creating a User conroller) - 1
-categories: Post
-tags: 
-- TIL
-- express.js
-- Node.js
-- mogodb
-- Mongoose
-- passport.js
 ---
 
 ## 순서

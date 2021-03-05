@@ -1,11 +1,6 @@
 ---
 layout: post 
 title: 너비 우선 탐색(Breadth-first search)
-categories: Post
-tags: 
-- TIL
-- Algorithms
-- Graph
 ---
 
 ## 1. Basic

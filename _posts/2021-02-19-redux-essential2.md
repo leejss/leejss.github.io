@@ -1,11 +1,6 @@
 ---
 layout: post 
 title: Redux Essentials, Part 2
-categories: Post 
-tags: 
-- TIL
-- React
-- Redux
 ---
 
 ## Create Basic Counter React + Redux app
