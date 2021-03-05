@@ -1,4 +1,4 @@
-I" :<h2 id="순서">순서</h2>
+I":<h2 id="순서">순서</h2>
 
 <ol>
   <li>mongoose.Schema 정의하기</li>
@@ -111,7 +111,7 @@
         <span class="nx">next</span><span class="p">();</span>
       <span class="p">})</span>
       <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="err">Error in connecting subscriber: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Error in connecting subscriber: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
         <span class="nx">next</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
       <span class="p">});</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>

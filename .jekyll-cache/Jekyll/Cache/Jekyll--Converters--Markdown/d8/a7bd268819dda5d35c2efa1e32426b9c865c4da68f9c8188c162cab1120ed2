@@ -1,4 +1,4 @@
-I"1$<h2 id="1-argument-유형">1. Argument 유형</h2>
+I"a$<h2 id="1-argument-유형">1. Argument 유형</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="c1"># caller
@@ -46,7 +46,7 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">f'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s"> is </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s"> years old'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s"> is </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s"> years old'</span><span class="p">)</span>
 
 <span class="n">check</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">"James"</span><span class="p">)</span> <span class="c1"># 당연하게도 10 is James years old 라고 print한다.
 </span>
@@ -64,7 +64,7 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span> <span class="c1"># 위의 예제와 똑같은 함수다.
-</span>    <span class="k">print</span><span class="p">(</span><span class="s">f'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s"> is </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s"> years old'</span><span class="p">)</span>
+</span>    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s"> is </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s"> years old'</span><span class="p">)</span>
 
 <span class="n">check</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">"James"</span><span class="p">)</span> <span class="c1"># keyword로 전달. print James is 20 years old
 </span>

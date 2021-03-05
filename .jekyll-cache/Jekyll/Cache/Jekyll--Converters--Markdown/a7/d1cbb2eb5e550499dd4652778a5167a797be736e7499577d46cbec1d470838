@@ -1,4 +1,4 @@
-I"�!<h2 id="순서">순서</h2>
+I"G!<h2 id="순서">순서</h2>
 
 <ol>
   <li>CRUD 중 Read 구현하기</li>
@@ -31,7 +31,7 @@
                 <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">uesr</span> <span class="o">=</span> <span class="nx">user</span>
                 <span class="nx">next</span><span class="p">()</span>
             <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="p">{</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="err">Error fetching user by ID: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Error fetching user by ID: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
                 <span class="nx">next</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
             <span class="p">})</span>
     <span class="p">}</span>
@@ -66,12 +66,12 @@
         <span class="p">})</span>
             <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="p">{</span>
                 <span class="c1">// update 성공 시, user 정보 페이지로 redirect</span>
-                <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">redirect</span> <span class="o">=</span> <span class="s2">`</span><span class="err">/users/</span><span class="p">${</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">}</span><span class="s2">`</span>
+                <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">redirect</span> <span class="o">=</span> <span class="s2">`/users/</span><span class="p">${</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">}</span><span class="s2">`</span>
                 <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">user</span>
                 <span class="nx">next</span><span class="p">()</span>
             <span class="p">})</span>
             <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="p">{</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="err">Error updating user by ID: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Error updating user by ID: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
                 <span class="nx">next</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span>
             <span class="p">})</span>
     <span class="p">}</span>

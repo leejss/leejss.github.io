@@ -1,4 +1,4 @@
-I"�<h2 id="순서">순서</h2>
+I"�<h2 id="순서">순서</h2>
 
 <ol>
   <li>필요한 패키지와 모듈 불러오기</li>
@@ -50,12 +50,12 @@
         <span class="nx">User</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">newUser</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
             <span class="k">if</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
                 <span class="c1">// user가 성공정으로 저장되었을 경우 flash message를 띄운다.</span>
-                <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span> <span class="s2">`</span><span class="p">${</span><span class="nx">user</span><span class="p">.</span><span class="nx">fullName</span><span class="p">}</span><span class="err">이 저장되었습니다.</span><span class="s2">`</span><span class="p">)</span>
+                <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span> <span class="s2">`</span><span class="p">${</span><span class="nx">user</span><span class="p">.</span><span class="nx">fullName</span><span class="p">}</span><span class="s2">이 저장되었습니다.`</span><span class="p">)</span>
                 <span class="c1">// 저장되었을 경우, 로그인 페이지 이동</span>
                 <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">redirect</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/users/login</span><span class="dl">"</span>
                 <span class="nx">next</span><span class="p">()</span>
             <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span> <span class="s2">`</span><span class="err">User를 생성하지 못했습니다: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+                <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span> <span class="s2">`User를 생성하지 못했습니다: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
                 <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">redirect</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/users/new</span><span class="dl">"</span>
                 <span class="nx">next</span><span class="p">()</span>
             <span class="p">}</span>

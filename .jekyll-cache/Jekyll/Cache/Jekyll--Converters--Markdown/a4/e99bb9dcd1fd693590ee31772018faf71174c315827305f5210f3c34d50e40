@@ -1,4 +1,4 @@
-I"�/<h2 id="template-literal">Template Literal</h2>
+I"�.<h2 id="template-literal">Template Literal</h2>
 
 <p>템플릿 리터럴은 내장된 표현식을 허용하는 문자열 리터럴이다.</p>
 
@@ -8,11 +8,11 @@
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// example</span>
 <span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">James</span><span class="dl">"</span>
-<span class="kd">const</span> <span class="nx">msg</span> <span class="o">=</span> <span class="s2">`</span><span class="err">Welcome </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span>
+<span class="kd">const</span> <span class="nx">msg</span> <span class="o">=</span> <span class="s2">`Welcome </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="c1">// Welcome James</span>
 
 <span class="kd">const</span> <span class="nx">flag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">msg2</span> <span class="o">=</span> <span class="s2">`</span><span class="err">Look at </span><span class="p">${</span><span class="nx">flag</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">me</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">you</span><span class="dl">"</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">msg2</span> <span class="o">=</span> <span class="s2">`Look at </span><span class="p">${</span><span class="nx">flag</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">me</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">you</span><span class="dl">"</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">msg2</span><span class="p">);</span> <span class="c1">// Look at me</span>
 
 </code></pre></div></div>
@@ -28,7 +28,7 @@
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">literals</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="nx">show</span><span class="s2">`</span><span class="err">This is template literal</span><span class="s2">`</span><span class="p">;</span> <span class="c1">// [ 'This is template literal' ]</span>
+<span class="nx">show</span><span class="s2">`This is template literal`</span><span class="p">;</span> <span class="c1">// [ 'This is template literal' ]</span>
 </code></pre></div></div>
 
 <p>표현식 사용없이 문자열 리터럴이 넘어가게 되면 해당 문자열을 원소로한 배열이 함수로 넘어가게 된다.</p>
@@ -44,7 +44,7 @@
 
 <span class="kd">const</span> <span class="nx">info</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">template</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="nx">show</span><span class="s2">`</span><span class="err">This is </span><span class="p">${</span><span class="nx">info</span><span class="p">}</span><span class="err"> literal</span><span class="s2">`</span><span class="p">;</span> <span class="c1">// [ 'This is ', ' literal' ]</span>
+<span class="nx">show</span><span class="s2">`This is </span><span class="p">${</span><span class="nx">info</span><span class="p">}</span><span class="s2"> literal`</span><span class="p">;</span> <span class="c1">// [ 'This is ', ' literal' ]</span>
 
 </code></pre></div></div>
 
@@ -57,7 +57,7 @@
 
 <span class="kd">const</span> <span class="nx">info</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">template</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="nx">show</span><span class="s2">`</span><span class="err">This is </span><span class="p">${</span><span class="nx">info</span><span class="p">}</span><span class="err"> literal</span><span class="s2">`</span><span class="p">;</span>
+<span class="nx">show</span><span class="s2">`This is </span><span class="p">${</span><span class="nx">info</span><span class="p">}</span><span class="s2"> literal`</span><span class="p">;</span>
 <span class="c1">// 결과</span>
 <span class="c1">// [ 'This is ', ' literal' ]</span>
 <span class="c1">// template </span>
@@ -79,7 +79,7 @@
 <span class="kd">const</span> <span class="nx">info</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">template</span><span class="dl">"</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">noun</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">literal</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="nx">show</span><span class="s2">`</span><span class="err">This </span><span class="p">${</span><span class="nx">be</span><span class="p">}</span><span class="err"> </span><span class="p">${</span><span class="nx">info</span><span class="p">}</span><span class="err"> </span><span class="p">${</span><span class="nx">noun</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="nx">show</span><span class="s2">`This </span><span class="p">${</span><span class="nx">be</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">info</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">noun</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
 
 <span class="cm">/*
 결과
@@ -107,7 +107,7 @@ literal
 <span class="kd">const</span> <span class="nx">info</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">template</span><span class="dl">"</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">noun</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">literal</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="nx">show</span><span class="s2">`</span><span class="err">This </span><span class="p">${</span><span class="nx">be</span><span class="p">}</span><span class="err"> </span><span class="p">${</span><span class="nx">info</span><span class="p">}</span><span class="err"> </span><span class="p">${</span><span class="nx">noun</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="nx">show</span><span class="s2">`This </span><span class="p">${</span><span class="nx">be</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">info</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">noun</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
 
 <span class="cm">/*
 결과
@@ -129,7 +129,7 @@ literal
 <span class="kd">const</span> <span class="nx">info</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">template</span><span class="dl">"</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">noun</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">literal</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="nx">show</span><span class="s2">`</span><span class="err">This </span><span class="p">${</span><span class="nx">be</span><span class="p">}</span><span class="err"> </span><span class="p">${</span><span class="nx">info</span><span class="p">}</span><span class="err"> </span><span class="p">${</span><span class="nx">noun</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="nx">show</span><span class="s2">`This </span><span class="p">${</span><span class="nx">be</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">info</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">noun</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
 
 <span class="cm">/*
 결과
