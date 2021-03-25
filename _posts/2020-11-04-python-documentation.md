@@ -1,6 +1,7 @@
 ---
 layout: post 
 title: 궁금한 거 파이썬에게 직접 물어보기(Python Documentation Sources)
+tags: python
 ---
 
 ## 1. `dir` function

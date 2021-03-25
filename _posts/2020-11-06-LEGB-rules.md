@@ -1,6 +1,7 @@
 ---
 layout: post 
 title: LEGB rule
+tags: python
 ---
 
 ## Scope

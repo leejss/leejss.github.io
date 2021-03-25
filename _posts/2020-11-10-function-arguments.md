@@ -1,6 +1,7 @@
 ---
 layout: post 
 title: Argument - Keywords vs Default argument - 1
+tags: python
 ---
 
 ## 1. Argument 유형

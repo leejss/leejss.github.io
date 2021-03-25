@@ -1,6 +1,7 @@
 ---
 layout: post 
 title: iterable과 iterator
+tags: python
 ---
 
 ## 1. Iteration

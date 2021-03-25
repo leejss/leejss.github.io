@@ -1,6 +1,7 @@
 ---
 layout: post 
 title: react-router-dom 맛보기 1
+tags: React
 ---
 
 ## Static Routing vs Dynamic Routing

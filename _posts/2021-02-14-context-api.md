@@ -1,6 +1,7 @@
 ---
 layout: post 
 title: React - Context API
+tags: React
 ---
 
 ## context 이용

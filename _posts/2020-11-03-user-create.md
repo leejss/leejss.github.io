@@ -1,8 +1,8 @@
 ---
-layout: post 
+layout: post
 title: 유저모델 만들기(Creating a User model)
-
-
+tags: mongoose
+---
 ## 순서
 
 1. mongoose.Schema 정의하기

@@ -1,6 +1,7 @@
 ---
 layout: post 
 title: Python으로 cli app 만들기
+tags: python
 ---
 
 ## CLI(Command Line Interface) application이란

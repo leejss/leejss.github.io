@@ -1,6 +1,7 @@
 ---
 layout: post 
 title: Mongodb CRUD methods
+tags: mongodb
 ---
 
 ## Mongodb data

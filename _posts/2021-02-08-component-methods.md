@@ -1,6 +1,7 @@
 ---
 layout: post 
 title: React - 컴포넌트에 method 추가하기
+tags: React
 ---
 
 ## 컴포넌트 메소드
@@ -10,7 +11,6 @@ title: React - 컴포넌트에 method 추가하기
 ```jsx
 // Example
 <button onClick={컴포넌트 메소드}>버튼</button>
-
 ```
 
 ## 클래스형 컴포넌트에서 메소드 추가하기 - 1

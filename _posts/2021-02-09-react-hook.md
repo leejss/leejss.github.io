@@ -1,6 +1,7 @@
 ---
 layout: post 
 title: React - Basic Hooks - 1
+tags: React
 ---
 
 ## Hooks

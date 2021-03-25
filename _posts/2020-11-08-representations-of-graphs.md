@@ -1,6 +1,7 @@
 ---
 layout: post 
 title: 그래프 나타내기 (Reresentations of graphs)
+tags: algorithm
 ---
 
 ## 0. Basic

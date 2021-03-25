@@ -1,6 +1,7 @@
 ---
 layout: post 
 title: React - Render props
+tags: React
 ---
 
 ## Sharing data with other components

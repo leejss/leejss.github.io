@@ -1,128 +1,129 @@
-# Dark Poole
+# Tale
 
-![Dark Poole](https://user-images.githubusercontent.com/13270895/89133355-26b3af80-d4e9-11ea-81cd-eacaa9c78320.png)
+[![Gem Version](https://badge.fury.io/rb/tale.svg)](https://badge.fury.io/rb/tale)
 
-Dark Poole is a permanent dark theme of the Poole theme by [@mdo](https://github.com/mdo). I made the theme darker, inspired by [Derek Kedziora's site](https://derekkedziora.com/). Unlike default Poole that utilizes CSS media queries to activate dark mode, the theme will stay dark regardless of the user's preference.
+Tale is a minimal Jekyll theme curated for storytellers. Checkout the demo [here](https://chesterhow.github.io/tale/).
 
-- I added a navbar that is easily customizable. Check out [Development](#development) to see how.
-- I also got rid of the "tagline" in the navbar. I think it looks cleaner without it.
-- Finally, I changed the default font size to 20px. I have 20/20 vision and still thought the original font size was too small.
+![Tale screenshot](http://i.imgur.com/pXZrtmo.png)
 
-That's it! I tried to be least intrusive as possible to the Poole code base.
+## Features
+- Easy installation
+- Compatible with GitHub Pages
+- Responsive design (looks just as good on mobile)
+- Syntax highlighting, with the help of Pygments
+- Markdown and HTML text formatting
+- Pagination of posts
+- [Disqus comments (can be enabled if needed)](#enabling-comments)
 
-**I noticed that Poole's documentation is slightly outdated and misleading. This documentation will try to address most, if not all, of these issues.**
+## Installation
+There are 3 ways to install this theme
 
----
+1. Install it as a Ruby Gem (for self-hosted sites)
+2. Install it with the `jekyll-remote-theme` plugin (for GitHub Pages hosted sites)
+3. Fork the project directly
 
-## Contents
+### Ruby Gem method
+1. Add this line to your `Gemfile`:
 
-- [Usage](#usage)
-- [Development](#development)
-- [Author](#author)
-- [License](#license)
+```ruby
+gem "tale"
+```
+
+2. Install the theme's gems and dependencies:
+
+```bash
+$ bundle
+```
+
+3. In `_config.yml` add these lines:
+
+```yaml
+theme:      tale
+
+permalink:  /:year-:month-:day/:title
+paginate:   5
+```
+
+Remove any other `theme:` lines.
+
+4. Rename `index.md` to `index.html`. Without this, the `jekyll-paginate` gem will not work.
+
+5. In `about.md`, change the `layout:` field to `post`:
+
+```Markdown
+layout: post
+```
+
+### GitHub Pages method
+1. Add these 2 lines in to your `Gemfile`:
+
+```ruby
+gem "jekyll-remote-theme"
+gem "jekyll-paginate"
+```
+
+2. Install the newly added gems:
+
+```bash
+$ bundle
+```
+
+3. In `_config.yml` add these lines:
+
+```yaml
+remote_theme: chesterhow/tale
+
+permalink:    /:year-:month-:day/:title
+paginate:     5
+
+plugins:
+  - jekyll-paginate
+  - jekyll-remote-theme
+```
+
+Remove any other `theme:` or `remote_theme:` lines.
+
+4. Rename `index.md` to `index.html`. Without this, the `jekyll-paginate` gem will not work.
+
+5. In `about.md`, change the `layout:` field to `post`:
+
+```Markdown
+layout: post
+```
+
+### Fork method
+1. Fork this repository
+
+2. Delete the unnecessary files/folders: `CODE_OF_CONDUCT.md`, `LICENSE`, `README.md`, `tale.gemspec`
+
+3. Delete the `baseurl` line in `_config.yml`:
+
+```yaml
+baseurl:  "/tale"   # delete this line
+```
 
 ## Usage
+Once you've installed the theme, you're ready to work on your Jekyll site. To start off, I would recommend updating `_config.yml` with your site's details.
 
-### 1. Install dependencies
-
-Poole is built on Jekyll and uses its built-in SCSS compiler to generate our CSS. Before getting started, you'll need to install the Jekyll gem and related dependencies:
-
-```bash
-$ gem install jekyll jekyll-gist jekyll-sitemap jekyll-seo-tag
-```
-
-### 2. Install bundler
-
-You must have bundler installed. If you already have bundler installed, please skip this step.
-
-```bash
-# Update Rubygems
-$ gem update --system
-# Update bundler
-$ gem install bundler
-```
-
-### 3. Running locally
-
-To see your Jekyll site with Poole applied, start a Jekyll server. In Terminal, from `/dark-poole` (or whatever your Jekyll site's root directory is named):
+To build and serve your site, run:
 
 ```bash
 $ bundle exec jekyll serve
 ```
 
-Open <http://localhost:4000> in your browser, and voilà.
+And you're all set! Head over to http://127.0.0.1:4000/ to see your site in action.
 
-### 4. Serving it up
+### Enabling Comments
+Comments are disabled by default. To enable them, look for the following line in `_config.yml` and change `jekyll-tale` to your site's Disqus id.
 
-If you host your code on GitHub, you can use [GitHub Pages](https://pages.github.com) to host your project.
-
-1. Fork this repo and switch to the `gh-pages` branch.
-1. If you're [using a custom domain name](https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages), modify the `CNAME` file to point to your new domain.
-1. If you're not using a custom domain name, **modify the `url` in `_config.yml`** to point to your GitHub Pages URL. Example: for a site hosted at `username.github.io`, use `http://username.github.io`.
-1. If you want to use your repo name as a base url, **set the `url`** to your repo link and **set the `baseurl`** to your repo name in **`_config.yml`**. Example: for site hosted on `https://username.github.io/dark-poole`, set `url` as `https://username.github.io/dark-poole` and `baseurl` as `/dark-poole`.
-1. Done! Head to your GitHub Pages URL or custom domain.
-
-No matter your production or hosting setup, be sure to verify the `baseurl` option file and `CNAME` settings. Not applying this correctly can mean broken styles on your site.
-
-### 5. Pagination for sites with base urls
-
-If you are using a base url for your site, (for example, hosted on `https://username.github.io/dark-poole`) you have to make some changes to get jekyll-pagination to work correctly:
-
-In `_config.yml`, add this line:
-
-```yaml
-paginate_path: "/baseurl/page:num/"
+```yml
+disqus: jekyll-tale
 ```
 
-In `archive.md`, add `{{ site.baseurl }}` before `{{ post.url }}`
+Next, add `comments: true` to the YAML front matter of the posts which you would like to enable comments for.
 
-```html
-<!-- Add "{{ site.baseurl }}" -->
-<li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
-```
-
-In `index.html`, remove the `prepend:`:
-
-```html
-<!-- Remove "prepend:" in "prepend: relative_url" -->
-<a
-  class="pagination-item newer"
-  href="{{ paginator.previous_page_path | relative_url }}"
-  >Newer</a
->
-```
-
-## Development
-
-Poole has two branches, but only one is used for active development.
-
-- `master` for development. **All pull requests should be to submitted against `master`.**
-- `gh-pages` for hosted demo **Please avoid using this branch.**
-
-CSS is handled via Jeykll's built-in Sass compiler. Source Sass files are located in `_sass/`, included into `styles.scss`, and compile to `styles.css`.
-
-### Customize Navbar
-
-You can easily customize the navbar by tweaking the `_config.yml` file. Simply change the title and url of each of the nav elements, or add more. The order will be preserved in the site.
-
-```yaml
-nav:
-  - title: Blog
-    url: /archive
-
-  - title: About
-    url: /about
-```
-
-## Author
-
-**Mark Otto**
-
-- <https://github.com/mdo>
-- <https://twitter.com/mdo>
+## Contributing
+Found a bug or have a suggestion? Feel free to create an issue or make a pull request!
 
 ## License
-
-Open sourced under the [MIT license](LICENSE.md).
-
-<3
+See [LICENSE](https://github.com/chesterhow/tale/blob/master/LICENSE)

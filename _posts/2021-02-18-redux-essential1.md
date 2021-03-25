@@ -1,6 +1,7 @@
 ---
 layout: post 
 title: Redux Essentials, Part 1
+tags: Redux
 ---
 
 ## What is Redux?
