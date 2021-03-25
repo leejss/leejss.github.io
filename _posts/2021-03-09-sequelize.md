@@ -1,6 +1,7 @@
 ---
 layout: post 
 title: Sequelize(시퀄라이즈) 정리
+tags: sequelize express
 ---
 
 ## 데이터베이스 연결하기
