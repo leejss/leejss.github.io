@@ -1,7 +1,7 @@
 ---
 layout: post 
 title: AbortController API 활용
-tags: TIL
+tags: TIL WebAPI
 ---
 
 ## AbortController Web AI
