@@ -92,6 +92,4 @@ export class Btn {
         this.cb()
     }
 }
-
-
 ```
