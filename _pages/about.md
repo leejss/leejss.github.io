@@ -6,5 +6,7 @@ permalink: /about/
 ---
 
 <p style='text-align: center'>
+
 Everyday I learn something.
+
 </p>
