@@ -53,7 +53,7 @@ data fetching이 필요한 컴포넌트마다 fetching logic을 담게 되면 �
 
 Higher Order Component를 사용하여 이를 수행할 수 있다.
 
-Higher Order Component(HOC)는 컴포넌트르 반환하는 함수를 말한다.
+Higher Order Component(HOC)는 컴포넌트를 반환하는 함수를 말한다.
 
 ## Creating HOC
 
@@ -78,7 +78,7 @@ function withDataFetching(Component) {
 // 함수형 컴포넌트 반환
 function withDataFetching(Component) {
 
-    // other hooks
+    // fetching data
 
     return <Component />
 }
@@ -127,7 +127,7 @@ export default function withDataFetching(Component) {
 
             const {data ,loading, error} = this.state
 
-            return <Component data={data} loading={loading} error={error} {...this.props}>
+            return <Component data={data} loading={loading} error={error} {...this.props} />
         }
     }
 }
