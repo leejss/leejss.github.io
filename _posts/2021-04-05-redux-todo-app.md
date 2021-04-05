@@ -133,7 +133,7 @@ export default todos
 // modules/index.js
 
 import {combineReducers} from 'redux'
-import {todos} from' './todo'
+import {todos} from './todo'
 
 const rootReducer = combineReducers({
     todos
