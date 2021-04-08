@@ -1,7 +1,7 @@
 ---
 layout: post 
 title: Tagged Template Literals
-tags: javascript
+tags: Javascript
 ---
 
 ## Template Literal
