@@ -27,7 +27,7 @@ const StyledDiv = styled.div`
 
 const Square = styled.div`
     widht: 500px;
-    height: 500px;
+    height: 500px;****
 
     ${props => props.blue &&  css`
         background: blue;
