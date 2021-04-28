@@ -14,6 +14,7 @@ footer,
 }
 
 .nav {
+  font-family: $sans-serif;
   box-shadow: 0 2px 2px -2px $shadow-color;
   overflow: auto;
   background-color: #000;
@@ -34,7 +35,7 @@ footer,
 
     &:hover,
     &:focus {
-      opacity: 0.6;
+      color: #fff;
     }
   }
 
@@ -49,7 +50,7 @@ footer,
     @include transition(all 0.2s ease-out);
     color: $default-color;
     display: inline-block;
-    opacity: 0.6;
+    // opacity: 0.6;
     padding: 0 2rem 0 0;
 
     &:last-child {
@@ -58,7 +59,7 @@ footer,
 
     &:hover,
     &:focus {
-      opacity: 1;
+      text-decoration: underline;
     }
   }
 
