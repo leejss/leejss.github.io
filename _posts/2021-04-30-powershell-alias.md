@@ -34,7 +34,7 @@ alias를 설정하여 다음과 같이 단순하게 만들 수 있다.
 
 ```shell
 > New-Alias spp Set-PoshPrompt
-> ssp powerline
+> ssp -Theme powerline
 ```
 
 ## Function
