@@ -2,6 +2,7 @@
 layout: post 
 title: React - Context API
 tags: React
+categories: React
 ---
 
 ## context 이용

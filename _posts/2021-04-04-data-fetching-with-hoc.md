@@ -3,6 +3,7 @@ layout: post
 title: Data fetching with HOC
 date: 2021-04-04 21:07 +0900
 tags: React
+categories: React
 ---
 
 ## Data fetching

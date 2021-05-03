@@ -2,7 +2,7 @@
 layout: post 
 title: react-router-dom 맛보기
 tags: React
-category: React
+categories: React
 ---
 
 ## Static Routing vs Dynamic Routing

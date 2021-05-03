@@ -3,7 +3,7 @@ layout: post
 title: React-Express Local dev 환경설정
 date: 2021-04-29 17:46 +0900
 tags: React Express
-category: React
+categories: React
 ---
 
 ## react와 express 사용

@@ -2,7 +2,7 @@
 layout: post 
 title: React - 조건부 렌더링
 tags: React
-category: React
+categories: React
 ---
 
 ## 조건부 렌더링이란

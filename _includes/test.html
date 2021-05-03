@@ -12,7 +12,7 @@
         >
       </li>
       {% assign pages_list = site.pages %} {% for node in pages_list %} {% if
-      node.title != null %} {% if node.layout == "category" %}
+      node.title != null %} {% if node.layout == "categories" %}
       <li>
         <a
           href="{{ site.baseurl }}{{node.url}}/"

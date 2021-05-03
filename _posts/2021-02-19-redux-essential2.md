@@ -2,7 +2,7 @@
 layout: post 
 title: Redux Essentials, Part 2
 tags: Redux
-category: React
+categories: React
 ---
 
 ## Create Basic Counter React + Redux app

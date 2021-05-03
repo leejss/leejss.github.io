@@ -3,7 +3,7 @@ layout: post
 title: React - useState를 이용해서 Tagbox 만들어보기
 date: 2021-04-10 23:18 +0900
 tags: React
-category: React
+categories: React
 ---
 
 ## 생각하기

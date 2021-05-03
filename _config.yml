@@ -42,7 +42,15 @@ disqus:         jekyll-tale
 
 exclude: [vendor]
 
-# Archive
+# # Archive
 category_archive:
-  type: liquid
-  path: /category/
+  type: jekyll-archives
+  path: /categories/
+jekyll-archives:
+  enabled:
+    - categories
+  layouts:
+    category: archive-taxonomy
+  permalinks:
+    category: /categories/:name/
+    

@@ -2,7 +2,7 @@
 layout: post 
 title: Redux Essentials, Part 1
 tags: Redux
-category: React
+categories: React
 ---
 
 ## What is Redux?
