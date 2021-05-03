@@ -43,6 +43,6 @@ disqus:         jekyll-tale
 exclude: [vendor]
 
 # Archive
-# category_archive:
-#   type: liquid
-#   path: /category/
+category_archive:
+  type: liquid
+  path: /category/
