@@ -41,3 +41,8 @@ exclude: [ Gemfile, Gemfile.lock, tale.gemspec ]
 disqus:         jekyll-tale
 
 exclude: [vendor]
+
+# Archive
+# category_archive:
+#   type: liquid
+#   path: /category/
