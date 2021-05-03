@@ -3,6 +3,7 @@ layout: post
 title: React Blog (3)
 date: 2021-04-30 14:51 +0900
 tags: React
+category: React
 ---
 
 ## 컴포넌트 구성

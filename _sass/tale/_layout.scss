@@ -17,7 +17,7 @@ footer,
   font-family: $sans-serif;
   box-shadow: 0 2px 2px -2px $shadow-color;
   overflow: auto;
-  background-color: #000;
+  background-color: #fff;
 
   &-container {
     margin: 1rem auto;
@@ -27,15 +27,15 @@ footer,
 
   &-title {
     @include transition(all 0.2s ease-out);
-    // color: $default-color;
-    color: #de6f1d;
+    color: $default-color;
+    // color: #de6f1d;
     display: inline-block;
     margin: 0;
     padding-right: 0.2rem;
 
     &:hover,
     &:focus {
-      color: #fff;
+      color: #000;
     }
   }
 
@@ -56,17 +56,23 @@ footer,
     &:last-child {
       padding-right: 0;
     }
-
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
   }
 
   a {
-    color: #de6f1d;
-    // color: $default-color;
+    // color: #de6f1d;
+    color: $default-color;
+    font-size: 1.3rem;
     font-weight: bold;
+    transition: 0.3s;
+    text-decoration: none;
+
+    &:hover {
+      color: #fe0000;
+    }
+  }
+  a.active {
+    color: #fe0000;
+    font-size: 1.5rem;
   }
 }
 

@@ -3,6 +3,7 @@ layout: post
 title: redux-thunk에 대해 알아보자
 date: 2021-04-30 16:46 +0900
 tags: Redux redux-thunk
+category: React
 ---
 
 [Redux Thunk](https://github.com/reduxjs/redux-thunk){:taget="_blank"}

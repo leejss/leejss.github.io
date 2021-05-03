@@ -3,6 +3,7 @@ layout: post
 title: redux, react-redux 알아보기
 date: 2021-04-02 17:54 +0900
 tags: Redux
+category: React
 ---
 
 ## Goal

@@ -5,24 +5,28 @@
     display: block;
     padding: 2rem 0;
 
-    &:hover .catalogue-line,
-    &:focus .catalogue-line {
-      width: 5rem;
-    }
+    // &:hover .catalogue-line,
+    // &:focus .catalogue-line {
+    //   transform: scale(1.05);
+    // }
 
     &:last-child {
       border: 0;
+    }
+    P {
+      font-family: $sans-serif;
     }
   }
 
   &-time {
     color: $default-tint;
-    font-family: $serif-secondary;
+    font-family: $monospaced;
     letter-spacing: 0.5px;
   }
 
   &-title {
-    color: $default-shade;
+    // color: $default-shade;
+    color: #000;
     display: block;
     font-family: $sans-serif;
     font-size: 2rem;
@@ -31,9 +35,9 @@
   }
 
   &-line {
-    @include transition(all 0.3s ease-out);
-    border-top: 0.2rem solid #de6f1d; // $default-shade
+    // @include transition(all 0.3s ease-out);
+    border-top: 0.2rem solid #ffb4b4; // $default-shade
     display: block;
-    width: 2rem;
+    width: 100%;
   }
 }

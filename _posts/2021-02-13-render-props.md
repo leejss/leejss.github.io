@@ -2,6 +2,7 @@
 layout: post 
 title: React - Render props
 tags: React
+category: React
 ---
 
 ## Sharing data with other components

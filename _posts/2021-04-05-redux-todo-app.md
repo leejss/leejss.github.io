@@ -3,6 +3,7 @@ layout: post
 title: Redux를 이용하여 Todo 로직 만들기
 date: 2021-04-05 10:31 +0900
 tags: Redux React
+category: React
 ---
 
 ## 라이브러리

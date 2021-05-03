@@ -3,6 +3,7 @@ layout: post
 title: React Design pattern
 tags: React
 date: 2021-03-30 16:21 +0900
+category: React
 ---
 
 ## keyword

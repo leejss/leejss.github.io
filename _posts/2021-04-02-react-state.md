@@ -3,6 +3,7 @@ layout: post
 title: React의 state 정리
 date: 2021-04-02 01:08 +0900
 tags: React
+category: React
 ---
 
 ## What is state

@@ -1,0 +1,47 @@
+<nav class="nav">
+  <div class="nav-container">
+    <a href="{{ site.baseurl }}/">
+      <h2 class="nav-title">{{ site.title }}</h2>
+    </a>
+    <ul>
+      <li>
+        <a
+          href="{{ site.baseurl }}/"
+          class="{% if page.url == '/' %} active{% endif %}"
+          >All</a
+        >
+      </li>
+      {% assign pages_list = site.pages %} {% for node in pages_list %} {% if
+      node.title != null %} {% if node.layout == "category" %}
+      <li>
+        <a
+          href="{{ site.baseurl }}{{node.url}}/"
+          class="{% if page.url == node.url %} active{% endif %}"
+          >{{node.title}}</a
+        >
+      </li>
+      {% endif %} {% endif %} {% endfor %}
+      <li>
+        <a
+          href="{{ '/tags' | prepend: site.baseurl }}"
+          class="{% if page.url == '/tags/' %} active{% endif %}"
+          >Tags</a
+        >
+      </li>
+      <li>
+        <a
+          href="{{ '/about' | prepend: site.baseurl }}"
+          class="{% if page.url == '/about/' %} active{% endif %}"
+          >About</a
+        >
+      </li>
+      <li>
+        <a
+          href="{{ '/self-taught' | prepend: site.baseurl }}"
+          class="{% if page.url == '/self-taught/' %} active{% endif %}"
+          >Self-taught</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>

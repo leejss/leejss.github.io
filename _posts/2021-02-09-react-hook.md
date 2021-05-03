@@ -2,6 +2,7 @@
 layout: post 
 title: React - Basic Hooks - 1
 tags: React
+category: React
 ---
 
 ## Hooks

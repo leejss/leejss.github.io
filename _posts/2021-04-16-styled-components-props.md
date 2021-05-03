@@ -3,6 +3,7 @@ layout: post
 title: styled-components에서 props 활용하기
 date: 2021-04-16 23:12 +0900
 tags: React styled-components
+category: React
 ---
 
 ## styled-component에서 props 받기
