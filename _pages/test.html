@@ -1,0 +1,15 @@
+---
+layout: post
+title: "test"
+author: "Lee Jongseo"
+permalink: /test/
+---
+<ul></ul>
+{% assign pages_list = site.pages %} {% for node in pages_list %}
+
+
+  <li>{{node.url}}</li>
+
+
+{% endfor %}
+</ul>
