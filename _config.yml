@@ -31,7 +31,7 @@ plugins:
   # - jemoji #Uncomment this to allow emoji in your post
 
 # Permalinks
-permalink:      /:year-:month-:day/:title
+permalink:      /:categories/:year-:month-:day/:title
 paginate:       8
 
 # Excludes
@@ -42,15 +42,15 @@ disqus:         jekyll-tale
 
 exclude: [vendor]
 
-# # Archive
-category_archive:
-  type: jekyll-archives
-  path: /categories/
-jekyll-archives:
-  enabled:
-    - categories
-  layouts:
-    category: archive-taxonomy
-  permalinks:
-    category: /categories/:name/
+# # # Archive
+# category_archive:
+#   type: jekyll-archives
+#   path: /categories/
+# jekyll-archives:
+#   enabled:
+#     - categories
+#   layouts:
+#     category: archive-taxonomy
+#   permalinks:
+#     category: /categories/:name/
     
