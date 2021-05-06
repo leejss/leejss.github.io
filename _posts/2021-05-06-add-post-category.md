@@ -49,7 +49,7 @@ _pages
 
 사이트의 모든 포스트를 불러옵니다.
 
-```html
+```txt
 ---
 layout: default
 title: "Algorithm"
@@ -62,7 +62,7 @@ permalink: /algorithm/
 
 만약 포스트의 카테고리가 alogirithm이라면 해당 포스트 링크와 관련 데이터를 가져옵니다.
 
-```html
+```txt
 {{ for post in site.posts }}
     {{ if post.categories[0] == "algorithm"}}
     <!-- post data -->
