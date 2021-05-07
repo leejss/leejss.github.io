@@ -5,10 +5,10 @@
     display: block;
     padding: 2rem 0;
 
-    // &:hover .catalogue-line,
-    // &:focus .catalogue-line {
-    //   transform: scale(1.05);
-    // }
+    &:hover .catalogue-line,
+    &:focus .catalogue-line {
+      border-top: 0.2rem solid #ff0000;
+    }
 
     &:last-child {
       border: 0;
@@ -35,6 +35,7 @@
   }
 
   &-line {
+    transition: all 0.2s;
     // @include transition(all 0.3s ease-out);
     border-top: 0.2rem solid #ffb4b4; // $default-shade
     display: block;
