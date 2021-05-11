@@ -2,9 +2,10 @@
 layout: post
 title: TypeGraphQL[0] - Setup
 date: 2021-05-11 22:05 +0900
+tags: GraphQL
 ---
 
-해당 포스트는 [Ben Awad의 TypeGraphQL Tutorial](https://www.youtube.com/playlist?list=PLN3n1USn4xlma1bBu3Tloe4NyYn9Ko8Gs)을 기반으로 작성하였습니다.
+해당 포스트는 [Ben Awad의 TypeGraphQL Tutorial](https://www.youtube.com/playlist?list=PLN3n1USn4xlma1bBu3Tloe4NyYn9Ko8Gs){:target="_blank"}을 기반으로 작성하였습니다.
 
 ## TypeGraphQL이란?
 
@@ -65,8 +66,8 @@ yarn add -D nodemon ts-node ts-node-dev typescript
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true, // allow to use decorator
+    "experimentalDecorators": true, // allow to use decorator
     "skipLibCheck": true,
     "baseUrl": ".",
     "rootDir": "src"
