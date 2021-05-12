@@ -60,6 +60,7 @@ export class RegisterInput {
 custom validation class는 다음과 같은 모습을 가지고 있다.
 
 ```ts
+// isEmailAlreadyExists.ts
 import { User } from "./../../../entity/User";
 import {
   registerDecorator,
@@ -87,6 +88,7 @@ export class IsUserAlreadyExistConstraint implements ValidatorConstraintInterfac
 ### Create custom validation decorators
 
 ```ts
+// isEmailAlreadyExists.ts
 export function IsEmailAlreadyExist(validationOptions?: ValidationOptions) {
   return function (object: Object, propertyName: string) {
     registerDecorator({
