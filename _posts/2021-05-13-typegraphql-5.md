@@ -1,6 +1,6 @@
 ---
 layout: post
-title: TypeGraphQL[5] - Confirmation Email 
+title: TypeGraphQL[5] - Confirmation Email
 date: 2021-05-13 22:41 +0900
 tags: GraphQL
 ---
