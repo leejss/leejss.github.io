@@ -78,4 +78,4 @@ export default function App() {
 
 ## Link
 
-[React Modal Example](https://codesandbox.io/s/recursing-robinson-0fqp4?file=/src/App.js)
+[React Modal Example](https://codesandbox.io/s/recursing-robinson-0fqp4?file=/src/App.js){:target="_blank"}
