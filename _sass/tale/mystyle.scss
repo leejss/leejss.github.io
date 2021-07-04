@@ -1,43 +1,48 @@
+img {
+  max-width: 700px;
+  max-height: 500px;
+}
+
 strong {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 .message {
-    text-align: center;
-    font-style: italic;
-    opacity: 0.5;
-    transition: all 1s;
+  text-align: center;
+  font-style: italic;
+  opacity: 0.5;
+  transition: all 1s;
 
-    &:hover {
-        opacity: 1;
-        transform: scale(1.3);
-    }
+  &:hover {
+    opacity: 1;
+    transform: scale(1.3);
+  }
 }
 
 .title {
-    font-size: 2rem;
-    padding-bottom: 15px;
-    border-bottom: 1.5px solid #bdbdbd;
+  font-size: 2rem;
+  padding-bottom: 15px;
+  border-bottom: 1.5px solid #bdbdbd;
 }
 
 .content-box {
-    font-family: "Times New Roman", Times, serif;
-    display: flex;
-    .left {
-        flex: 1;
-    }
+  font-family: "Times New Roman", Times, serif;
+  display: flex;
+  .left {
+    flex: 1;
+  }
 
-    .right {
-        flex: 1;
-        // text-align: right;
-        .highlight {
-            padding: 0;
-            box-shadow: inset 3em 1em #d9fcdb;
-        }
+  .right {
+    flex: 1;
+    // text-align: right;
+    .highlight {
+      padding: 0;
+      box-shadow: inset 3em 1em #d9fcdb;
     }
+  }
 }
 
 .sub-title {
-    margin: 0;
-    padding-left: 10px;
+  margin: 0;
+  padding-left: 10px;
 }
