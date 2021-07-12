@@ -9,7 +9,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nanum+Gothic:wght@400;700&family=Roboto+Mono&display=swap"
     rel="stylesheet"
-  <link
+    <link
     href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap"
     rel="stylesheet"
   />
@@ -27,4 +27,14 @@
   <!-- Google Analytics-->
   {% if site.google_analytics and jekyll.environment == 'production' %} {%
   include analytics.html %} {% endif %}
+
+  <!--  -->
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/base16/railscasts.min.css"
+  />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
 </head>
