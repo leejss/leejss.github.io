@@ -196,9 +196,13 @@
 
 .highlight {
   padding: 0;
-  font-weight: 100;
+  font-weight: 400;
 }
 
 ::selection {
   color: rgb(255, 154, 2);
+}
+
+.highlight .hljs-comment {
+  color: #9b9b9b;
 }
